@@ -1,0 +1,11 @@
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.csproj.CoreCompileInputs.cache
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\CarDealer.Model.dll.config
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\CarDealer.Model.dll
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\CarDealer.Model.pdb
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\EntityFramework.dll
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\EntityFramework.xml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.csproj.CopyComplete
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.dll
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.pdb
