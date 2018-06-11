@@ -7,9 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBox x:Name="userName" HorizontalAlignment="Left" Height="23" Margin="272,136,0,0" TextWrapping="Wrap" Text="{Binding UserName, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="272,182,0,0"  VerticalAlignment="Top" Width="120"/>
-        <Button Content="Log In" CommandParameter="{Binding ElementName=password}" Command="{Binding LoginUserCommand}" HorizontalAlignment="Left" Margin="300,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Username:"/>
+            <TextBox Margin="5" x:Name="userName" Height="34" TextWrapping="Wrap" Text="{Binding UserName, Mode=TwoWay}" Width="240"/>
 
+                <Label Content="Password:"/>
+                <PasswordBox Margin="5" x:Name="password" Height="34"   VerticalAlignment="Top" Width="240"/>
+            
+            
+            <Button Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Log In" CommandParameter="{Binding ElementName=password}" Command="{Binding LoginUserCommand}"  Width="80"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

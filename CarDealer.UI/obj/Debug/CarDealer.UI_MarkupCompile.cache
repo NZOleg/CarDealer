@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\App.xaml
-2-268177722
+91605563922
 
-151058172823
-20-514869389
-MainWindow.xaml;View\LoginView.xaml;
+51-247986649
+29-1406965984
+MainWindow.xaml;View\AddEditCarView.xaml;View\AddEditCustomerView.xaml;View\CarDetailView.xaml;View\CarListView.xaml;View\CustomerDetailView.xaml;View\CustomerListView.xaml;View\LoginView.xaml;View\MenuView.xaml;
 
 False
 

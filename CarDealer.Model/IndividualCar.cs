@@ -17,7 +17,7 @@ namespace CarDealer.DataAccess
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CarID { get; set; }
 
         [Required]
@@ -25,12 +25,10 @@ namespace CarDealer.DataAccess
         public string Colour { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Current_Mileage { get; set; }
+        public int Current_Mileage { get; set; }
 
         [Required]
-        [StringLength(10)]
-        public string Date_Imported { get; set; }
+        public DateTime Date_Imported { get; set; }
 
         public int Manufacture_Year { get; set; }
 
@@ -46,8 +44,8 @@ namespace CarDealer.DataAccess
         [StringLength(50)]
         public string Body_Type { get; set; }
 
-        public int Model_ID { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual CarModel CarModel { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

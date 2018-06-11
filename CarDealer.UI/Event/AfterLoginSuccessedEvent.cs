@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarDealer.UI.Event
 {
-    class AfterLoginSuccessedEvent: PubSubEvent<AfterLoginSuccessedArgs>
+    class AfterLoginSuccessedEvent: PubSubEvent<AfterLoginSuccessedEventArgs>
     {
     }
     public class AfterLoginSuccessedEventArgs

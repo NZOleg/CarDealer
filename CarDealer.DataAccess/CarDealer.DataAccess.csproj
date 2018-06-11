@@ -58,6 +58,54 @@
     <Compile Include="Migrations\201806050202546_PersonLoginChanged.Designer.cs">
       <DependentUpon>201806050202546_PersonLoginChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806050856509_CustomerAndEmployeeKeyChanged.cs" />
+    <Compile Include="Migrations\201806050856509_CustomerAndEmployeeKeyChanged.Designer.cs">
+      <DependentUpon>201806050856509_CustomerAndEmployeeKeyChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806080433276_FeatureTitleAdded.cs" />
+    <Compile Include="Migrations\201806080433276_FeatureTitleAdded.Designer.cs">
+      <DependentUpon>201806080433276_FeatureTitleAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806080434527_FeatureTitleAdded1.cs" />
+    <Compile Include="Migrations\201806080434527_FeatureTitleAdded1.Designer.cs">
+      <DependentUpon>201806080434527_FeatureTitleAdded1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806100603250_SeedAndIndCarsModified.cs" />
+    <Compile Include="Migrations\201806100603250_SeedAndIndCarsModified.Designer.cs">
+      <DependentUpon>201806100603250_SeedAndIndCarsModified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806100613077_SeedAndIndCarsModifiedFix.cs" />
+    <Compile Include="Migrations\201806100613077_SeedAndIndCarsModifiedFix.Designer.cs">
+      <DependentUpon>201806100613077_SeedAndIndCarsModifiedFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806100619409_SeedAndIndCarsModifiedFix1.cs" />
+    <Compile Include="Migrations\201806100619409_SeedAndIndCarsModifiedFix1.Designer.cs">
+      <DependentUpon>201806100619409_SeedAndIndCarsModifiedFix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806100837102_indCarsFix.cs" />
+    <Compile Include="Migrations\201806100837102_indCarsFix.Designer.cs">
+      <DependentUpon>201806100837102_indCarsFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806102325024_IndCarsAutoincAdded.cs" />
+    <Compile Include="Migrations\201806102325024_IndCarsAutoincAdded.Designer.cs">
+      <DependentUpon>201806102325024_IndCarsAutoincAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806102332389_IndCarsAutoincAdded1.cs" />
+    <Compile Include="Migrations\201806102332389_IndCarsAutoincAdded1.Designer.cs">
+      <DependentUpon>201806102332389_IndCarsAutoincAdded1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806102335130_IndCarsAutoincAdded2.cs" />
+    <Compile Include="Migrations\201806102335130_IndCarsAutoincAdded2.Designer.cs">
+      <DependentUpon>201806102335130_IndCarsAutoincAdded2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806102340481_IndCarsAutoincAdded3.cs" />
+    <Compile Include="Migrations\201806102340481_IndCarsAutoincAdded3.Designer.cs">
+      <DependentUpon>201806102340481_IndCarsAutoincAdded3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806110035061_IndCarsAutoincAdded4.cs" />
+    <Compile Include="Migrations\201806110035061_IndCarsAutoincAdded4.Designer.cs">
+      <DependentUpon>201806110035061_IndCarsAutoincAdded4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,6 +128,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806050202546_PersonLoginChanged.resx">
       <DependentUpon>201806050202546_PersonLoginChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806050856509_CustomerAndEmployeeKeyChanged.resx">
+      <DependentUpon>201806050856509_CustomerAndEmployeeKeyChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806080433276_FeatureTitleAdded.resx">
+      <DependentUpon>201806080433276_FeatureTitleAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806080434527_FeatureTitleAdded1.resx">
+      <DependentUpon>201806080434527_FeatureTitleAdded1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806100603250_SeedAndIndCarsModified.resx">
+      <DependentUpon>201806100603250_SeedAndIndCarsModified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806100613077_SeedAndIndCarsModifiedFix.resx">
+      <DependentUpon>201806100613077_SeedAndIndCarsModifiedFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806100619409_SeedAndIndCarsModifiedFix1.resx">
+      <DependentUpon>201806100619409_SeedAndIndCarsModifiedFix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806100837102_indCarsFix.resx">
+      <DependentUpon>201806100837102_indCarsFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806102325024_IndCarsAutoincAdded.resx">
+      <DependentUpon>201806102325024_IndCarsAutoincAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806102332389_IndCarsAutoincAdded1.resx">
+      <DependentUpon>201806102332389_IndCarsAutoincAdded1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806102335130_IndCarsAutoincAdded2.resx">
+      <DependentUpon>201806102335130_IndCarsAutoincAdded2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806102340481_IndCarsAutoincAdded3.resx">
+      <DependentUpon>201806102340481_IndCarsAutoincAdded3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806110035061_IndCarsAutoincAdded4.resx">
+      <DependentUpon>201806110035061_IndCarsAutoincAdded4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

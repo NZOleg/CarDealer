@@ -30,7 +30,6 @@ namespace CarDealer.DataAccess
             modelBuilder.Entity<CarModel>()
                 .HasMany(e => e.IndividualCars)
                 .WithRequired(e => e.CarModel)
-                .HasForeignKey(e => e.Model_ID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Cars_Sold>()
@@ -44,8 +43,7 @@ namespace CarDealer.DataAccess
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<IndividualCar>()
-                .Property(e => e.Date_Imported)
-                .IsFixedLength();
+                .Property(e => e.Date_Imported);
 
             modelBuilder.Entity<IndividualCar>()
                 .HasMany(e => e.Cars_Sold)

@@ -9,7 +9,8 @@ namespace CarDealer.DataAccess
     [Table("Employee")]
     public partial class Employee
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("Person")]
+        [Key]
         public int EmployeeID { get; set; }
 
         [Required]

@@ -1,5 +1,6 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.Event;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -15,6 +16,7 @@ namespace CarDealer.UI.ViewModel
 {
     public class LoginViewModel: ViewModelBase, ILoginViewModel
     {
+        private IEventAggregator _eventAggregator;
         private IPersonRepository _personRepository;
 
         public ICommand LoginUserCommand { get; set; }
@@ -30,7 +32,15 @@ namespace CarDealer.UI.ViewModel
         private async void OnLoginExecute(PasswordBox password)
         {
             Person person = await _personRepository.GetByUsernameAndPasswordAsync(UserName, password.Password);
-            //make an event
+            if (person == null)
+            {
+                return;
+            }
+            string role = await _personRepository.GetPersonRole(person.PersonID);
+            _eventAggregator.GetEvent<AfterLoginSuccessedEvent>().Publish(new AfterLoginSuccessedEventArgs {
+                Id = person.PersonID,
+                Role = role
+            });
         }
     }
 }

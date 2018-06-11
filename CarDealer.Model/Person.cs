@@ -9,6 +9,7 @@ namespace CarDealer.DataAccess
     [Table("Person")]
     public partial class Person
     {
+        [Key]
         public int PersonID { get; set; }
 
         [Required]

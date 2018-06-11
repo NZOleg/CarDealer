@@ -15,7 +15,8 @@ namespace CarDealer.DataAccess
             Cars_Sold = new HashSet<Cars_Sold>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("Person")]
+        [Key]
         public int CustomerID { get; set; }
 
         [Required]

@@ -1,0 +1,52 @@
+﻿using CarDealer.DataAccess;
+using CarDealer.UI.Event;
+using Prism.Commands;
+using Prism.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CarDealer.UI.ViewModel
+{
+    public class CarListItemViewModel : ViewModelBase, ICarListItemViewModel
+    {
+        private IndividualCar _car;
+
+        public IndividualCar Car
+        {
+            get { return _car; }
+            set {
+                _car = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private IEventAggregator _eventAggregator;
+
+        public DelegateCommand OpenCarDetailViewCommand { get; private set; }
+
+        public string DisplayName
+        {
+            get { return Car.CarModel.Manufacturer + " " + Car.CarModel.Model + " " +  Car.Manufacture_Year; }
+        }
+
+
+        public CarListItemViewModel(IndividualCar car, IEventAggregator eventAggregator)
+        {
+            Car = car;
+            _eventAggregator = eventAggregator;
+            OpenCarDetailViewCommand = new DelegateCommand(OpenCarDetailViewExecute);
+
+        }
+
+        private void OpenCarDetailViewExecute()
+        {
+            _eventAggregator.GetEvent<OpenCarDetailViewEvent>().Publish(new OpenCarDetailViewEventArgs
+            {
+                Id = Car.CarID
+            });
+        }
+    }
+}
