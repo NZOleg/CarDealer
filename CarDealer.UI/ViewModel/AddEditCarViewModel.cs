@@ -24,7 +24,21 @@ namespace CarDealer.UI.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+        private bool _hasChanges;
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set
+            {
+                if (_hasChanges != value)
+                {
+                    _hasChanges = value;
+                    OnPropertyChanged();
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            }
+        }
+
         private IEventAggregator _eventAggregator;
 
         public DelegateCommand SaveCommand { get;  }
@@ -70,6 +84,19 @@ namespace CarDealer.UI.ViewModel
                 IndividualCar car = await _carRepository.GetByIdAsync(carId);
                 Car = new CarWrapper(car);
             }
+
+            Car.PropertyChanged += (s, e) =>
+            {
+                if (!HasChanges)
+                {
+                    HasChanges = _carRepository.HasChanges();
+                }
+                if (e.PropertyName == nameof(Car.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
     }
 }

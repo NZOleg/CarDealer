@@ -57,9 +57,9 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<ICollection<Cars_Sold>>(); }
             set { SetValue(value); }
         }
-        public Person Person
+        public Customer Customer
         {
-            get { return GetValue<Person>(); }
+            get { return GetValue<Customer>(); }
             set { SetValue(value); }
         }
     }

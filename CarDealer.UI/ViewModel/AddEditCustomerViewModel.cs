@@ -21,8 +21,23 @@ namespace CarDealer.UI.ViewModel
             get { return _customer; }
             set
             {
+
                 _customer = value;
                 OnPropertyChanged();
+            }
+        }
+        private bool _hasChanges;
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set
+            {
+                if (_hasChanges != value)
+                {
+                    _hasChanges = value;
+                    OnPropertyChanged();
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
             }
         }
 
@@ -70,6 +85,21 @@ namespace CarDealer.UI.ViewModel
                 Person person = await _personRepository.GetByIdAsync(customerId);
                 Customer = new CustomerWrapper(person);
             }
+
+            Customer.PropertyChanged += (s, e) =>
+            {
+                if (!HasChanges)
+                {
+                    HasChanges = _personRepository.HasChanges();
+                }
+                if (e.PropertyName == nameof(Customer.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
+
     }
+
 }
