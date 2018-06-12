@@ -4,9 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
+             xmlns:c="clr-namespace:CarDealer.UI"
              xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="FeaturesTemplate">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding IsChecked}" />
+                <TextBlock Text="{Binding CarFeature.Car_Feature}" />
+            </StackPanel>
+
+
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <!-- <Setter Property="FontWeight" Value="Bold"/> 
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="FontWeight" Value="Normal"/>-->
+                </Trigger>
+            </DataTemplate.Triggers>
+
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -45,8 +67,14 @@
             <Label Grid.Row="2" Grid.Column="0" Content="Date Imported:" Margin="10 5" />
             <toolkit:DateTimePicker Grid.Row="2"  Grid.Column="1" Width="260" Value="{Binding Car.Date_Imported,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Manufacture Year:" Margin="10 5" />
-            <TextBox Grid.Row="3"  Grid.Column="1" Width="260" Text="{Binding Car.Manufacture_Year,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+            <TextBox Grid.Row="3"  Grid.Column="1" Width="260"  Margin="10 5">
+                <Binding Path="Car.Manufacture_Year"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" >
+                    <Binding.ValidationRules>
+                        <c:ValidationRules Type="int"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label Grid.Row="4" Grid.Column="0" Content="Transmission:" Margin="10 5" />
             <TextBox Grid.Row="4"  Grid.Column="1" Width="260" Text="{Binding Car.Transmission,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
@@ -75,6 +103,16 @@
               Command="{Binding DeleteCommand}"/>
             </StackPanel>
         </Grid>
+        <Grid Grid.Column="2">
+            <GroupBox  Header="Features">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="carList" ItemsSource="{Binding CarFeatures, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource FeaturesTemplate}"/>
 
+                </ScrollViewer>
+
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

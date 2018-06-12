@@ -9,12 +9,7 @@ namespace CarDealer.DataAccess
     public partial class Cars_Sold
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Car_Sold_ID { get; set; }
-
-        public int Car_For_Sale_Id { get; set; }
-
-        public int Customer_Id { get; set; }
 
         [Column(TypeName = "money")]
         public decimal Sale_Price { get; set; }
@@ -23,7 +18,7 @@ namespace CarDealer.DataAccess
         public DateTime Date_Sold { get; set; }
 
         public virtual Customer Customer { get; set; }
-
+        [Required]
         public virtual IndividualCar IndividualCar { get; set; }
     }
 }

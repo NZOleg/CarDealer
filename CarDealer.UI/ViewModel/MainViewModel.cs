@@ -13,6 +13,15 @@ namespace CarDealer.UI.ViewModel
 {
     public class MainViewModel: ViewModelBase
     {
+        private Person _currentUser;
+
+        public Person CurrentUser
+        {
+            get { return _currentUser; }
+            set { _currentUser = value; }
+        }
+        public string Role { get; set; }
+
         private IEventAggregator _eventAggregator;
         private IPersonRepository _personRepository;
         private ILoginViewModel _loginViewModel;
@@ -27,6 +36,7 @@ namespace CarDealer.UI.ViewModel
         }
 
         private Func<IAddEditCarViewModel> _addEditCarViewModelCreator;
+        private Func<ILoginViewModel> _loginViewModelCreator;
         private Func<IAddEditCustomerViewModel> _addEditCustomerViewModelCreator;
         private Func<ICustomerListViewModel> _customerListViewModelCreator;
         private Func<IMenuViewModel> _menuViewModelCreator;
@@ -62,7 +72,7 @@ namespace CarDealer.UI.ViewModel
             Func<ICarListViewModel> carListViewModelCreator, Func<IMenuViewModel> menuViewModelCreator,
             Func<IAddEditCarViewModel> addEditCarViewModelCreator, Func<ICarDetailViewModel> carDetailViewModelCreator,
             Func<ICustomerListViewModel> customerListViewModelCreator, Func<ICustomerDetailViewModel> customerDetailViewModelCreator,
-            Func<IAddEditCustomerViewModel> addEditCustomerViewModelCreator, IEventAggregator eventAggregator)
+            Func<IAddEditCustomerViewModel> addEditCustomerViewModelCreator, Func<ILoginViewModel> loginViewModelCreator, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _personRepository = personRepository;
@@ -70,6 +80,7 @@ namespace CarDealer.UI.ViewModel
             LoginViewModel = loginViewModel;
 
             _addEditCarViewModelCreator = addEditCarViewModelCreator;
+            _loginViewModelCreator = loginViewModelCreator;
             _addEditCustomerViewModelCreator = addEditCustomerViewModelCreator;
             _customerListViewModelCreator = customerListViewModelCreator;
             _menuViewModelCreator = menuViewModelCreator;
@@ -88,8 +99,21 @@ namespace CarDealer.UI.ViewModel
                 .Subscribe(OpenCarDetails);
             _eventAggregator.GetEvent<OpenCustomerListEvent>()
                 .Subscribe(OpenCustomerList);
+            _eventAggregator.GetEvent<OpenCarListEvent>()
+                .Subscribe(OpenCarList);
             _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>()
                 .Subscribe(OpenCustomerDetails);
+            _eventAggregator.GetEvent<AfterLogoutEvent>()
+                .Subscribe(OpenLoginPage);
+
+        }
+
+        private void OpenLoginPage(AfterLogoutEventArgs obj)
+        {
+
+            CurrentView = null;
+            MenuViewModel = null;
+            LoginViewModel = _loginViewModelCreator();
 
         }
 
@@ -110,11 +134,16 @@ namespace CarDealer.UI.ViewModel
             CurrentView = _customerListViewModelCreator();
             CurrentView.LoadAsync();
         }
+        private void OpenCarList(OpenCarListEventArgs obj)
+        {
+            CurrentView = _carListViewModelCreator();
+            CurrentView.LoadAsync();
+        }
 
         private void OpenCarDetails(OpenCarDetailViewEventArgs obj)
         {
             CurrentView = _carDetailViewModelCreator();
-            CurrentView.LoadAsync(obj.Id);
+            CurrentView.LoadAsync(obj.Id, Role);
         }
 
         private void AddEditCar(AddEditCarEventArgs obj)
@@ -125,23 +154,23 @@ namespace CarDealer.UI.ViewModel
 
         private async void AfterLoginSuccessed(AfterLoginSuccessedEventArgs obj)
         {
+            CurrentUser = obj.Person;
+            Role = obj.Role;
+
             LoginViewModel = null;
             CurrentView = _carListViewModelCreator();
             await CurrentView.LoadAsync();
             MenuViewModel = _menuViewModelCreator();
-
+            MenuViewModel.Load(Role);
             
         }
 
-        public async Task LoadAsync()
+
+
+        public void Load()
         {
-           var lookup =  await _personRepository.GetAllAsync();
-            people.Clear();
-            foreach (var item in lookup)
-            {
-                people.Add(new Person());
-            }
         }
+
     }
 
 }

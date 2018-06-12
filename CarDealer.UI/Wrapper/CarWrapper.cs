@@ -26,9 +26,9 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
-        public int Current_Mileage
+        public int? Current_Mileage
         {
-            get { return GetValue<int>(); }
+            get { return GetValue<int?>(); }
             set { SetValue(value); }
         }
         public DateTime Date_Imported
@@ -37,9 +37,9 @@ namespace CarDealer.UI.Wrapper
             set { SetValue(value); }
         }
 
-        public int Manufacture_Year
+        public int? Manufacture_Year
         {
-            get { return GetValue<int>(); }
+            get { return GetValue<int?>(); }
             set { SetValue(value); }
         }
         public string Transmission
@@ -55,11 +55,6 @@ namespace CarDealer.UI.Wrapper
         public string Body_Type
         {
             get { return GetValue<string>(); }
-            set { SetValue(value); }
-        }
-        public int Model_ID
-        {
-            get { return GetValue<int>(); }
             set { SetValue(value); }
         }
         public CarModel CarModel
@@ -80,6 +75,19 @@ namespace CarDealer.UI.Wrapper
         {
             get { return GetValue<List<CarFeature>>(); }
             set { SetValue(value); }
+        }
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(Colour):
+                    if (string.Equals(Colour, "Oleg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        yield return "Robots are not valid friends";
+                    }
+                    break;
+
+            }
         }
     }
 }

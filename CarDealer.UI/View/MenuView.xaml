@@ -4,17 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
+             xmlns:helper="clr-namespace:CarDealer.UI.Helpers"
+        xmlns:viewModel="clr-namespace:CarDealer.UI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <helper:MenuItemContainerTemplateSelector x:Key="_menuItemContainerTemplateSelector" />
+        <HierarchicalDataTemplate DataType="{x:Type viewModel:MenuItemViewModel}"
+        ItemsSource="{Binding SubItems}">
+            <MenuItem Header="{Binding Header}"
+                  Command="{Binding MenuItemCommand}"
+                  UsesItemContainerTemplate ="true"
+                       ItemContainerTemplateSelector=
+                  "{StaticResource _menuItemContainerTemplateSelector}"/>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <Menu HorizontalAlignment="Left" Height="auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
-
-            <MenuItem Header="Cars">
-                <MenuItem Header="New Car" Command="{Binding CreateNewCarCommand}"/>
-                <MenuItem Header="List of Customers" Command="{Binding ShowCustomerListCommand}"/>
-            </MenuItem>
+        <Menu DockPanel.Dock="Top"
+          ItemsSource="{Binding MenuItems}"
+          UsesItemContainerTemplate="True"
+                        ItemContainerTemplateSelector=
+          "{StaticResource _menuItemContainerTemplateSelector}">
         </Menu>
-
-
     </Grid>
 </UserControl>

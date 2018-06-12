@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using CarDealer.DataAccess;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace CarDealer.UI.Event
     }
     public class AfterLoginSuccessedEventArgs
     {
-        public int Id { get; set; }
         public string Role { get; set; }
+        public Person Person { get; set; }
     }
 }

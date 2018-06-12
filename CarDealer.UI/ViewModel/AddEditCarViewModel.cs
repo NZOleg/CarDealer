@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,19 @@ namespace CarDealer.UI.ViewModel
 {
     class AddEditCarViewModel : ViewModelBase, IAddEditCarViewModel
     {
+
+
         private ICarRepository _carRepository;
         private CarWrapper _car;
+
+        private ObservableCollection<CarFeatureModelView> _carFeatures;
+
+        public ObservableCollection<CarFeatureModelView> CarFeatures
+        {
+            get { return _carFeatures; }
+            set { _carFeatures = value; }
+        }
+
 
         public CarWrapper Car
         {
@@ -50,6 +62,7 @@ namespace CarDealer.UI.ViewModel
             SaveCommand = new DelegateCommand(OnSaveCommandExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _carRepository = carRepository;
+            CarFeatures = new ObservableCollection<CarFeatureModelView>();
         }
 
         private async void OnDeleteCommandExecute()
@@ -60,31 +73,55 @@ namespace CarDealer.UI.ViewModel
 
         private async void OnSaveCommandExecute()
         {
-            Car.CarModel = await _carRepository.SaveCarModelAsync(Car.CarModel);
-            _carRepository.Add(Car.Model);
+            CarModel carModel = await _carRepository.CreateOrAssignCarModelAsync(Car.Model.CarModel);
+            Car.Model.CarModel = carModel;
+            Car.CarFeatures = getSelectedFeatures();
             await _carRepository.SaveAsync();
                 
         }
 
+        private List<CarFeature> getSelectedFeatures()
+        {
+            List<CarFeature> carFeatures = new List<CarFeature>();
+            foreach (CarFeatureModelView carFeature in CarFeatures)
+            {
+                if (carFeature.IsChecked)
+                {
+                    carFeatures.Add(carFeature.CarFeature);
+                }
+                
+            }
+            return carFeatures;
+        }
+
         public async Task LoadAsync(int? id)
         {
-            int carId;
+            IndividualCar car;
             if (id == null)
             {
-                Car = new CarWrapper(new IndividualCar {
-                    CarModel = new CarModel(),
-                    CarFeatures = null,
-                    Cars_Sold = null
-                });
+                car = CreateNewCar();
             }
             else
             {
-                //converting int? into int
-                carId = (int) id;
-                IndividualCar car = await _carRepository.GetByIdAsync(carId);
-                Car = new CarWrapper(car);
+                car = await _carRepository.GetByIdAsync((int)id);
             }
+            InitializeCar(car);
 
+            await LoadCarFeaturesAsync();
+        }
+
+        private async Task LoadCarFeaturesAsync()
+        {
+            List<CarFeature> carFeatures = await _carRepository.getAllCarFeatures();
+            foreach(CarFeature carFeature in carFeatures)
+            {
+                CarFeatures.Add(new CarFeatureModelView(carFeature) { IsChecked=true });
+            }
+        }
+
+        private void InitializeCar(IndividualCar car)
+        {
+            Car = new CarWrapper(car);
             Car.PropertyChanged += (s, e) =>
             {
                 if (!HasChanges)
@@ -97,6 +134,17 @@ namespace CarDealer.UI.ViewModel
                 }
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+        }
+
+        private IndividualCar CreateNewCar()
+        {
+            var car = new IndividualCar {
+                CarModel = new CarModel(),
+                Cars_Sold = null,
+                CarFeatures = new Collection<CarFeature>()
+            };
+            _carRepository.Add(car);
+            return car;
         }
     }
 }

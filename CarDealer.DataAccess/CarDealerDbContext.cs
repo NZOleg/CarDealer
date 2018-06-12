@@ -39,17 +39,13 @@ namespace CarDealer.DataAccess
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Cars_Sold)
                 .WithRequired(e => e.Customer)
-                .HasForeignKey(e => e.Customer_Id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<IndividualCar>()
                 .Property(e => e.Date_Imported);
 
             modelBuilder.Entity<IndividualCar>()
-                .HasMany(e => e.Cars_Sold)
-                .WithRequired(e => e.IndividualCar)
-                .HasForeignKey(e => e.Car_For_Sale_Id)
-                .WillCascadeOnDelete(false);
+                .HasOptional(e => e.Cars_Sold);
 
             modelBuilder.Entity<Person>()
                 .HasOptional(e => e.Customer)

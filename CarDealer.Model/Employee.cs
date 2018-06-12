@@ -10,7 +10,6 @@ namespace CarDealer.DataAccess
     public partial class Employee
     {
         [ForeignKey("Person")]
-        [Key]
         public int EmployeeID { get; set; }
 
         [Required]

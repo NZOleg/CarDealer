@@ -38,8 +38,8 @@ namespace CarDealer.UI.ViewModel
             }
             string role = await _personRepository.GetPersonRole(person.PersonID);
             _eventAggregator.GetEvent<AfterLoginSuccessedEvent>().Publish(new AfterLoginSuccessedEventArgs {
-                Id = person.PersonID,
-                Role = role
+                Role = role,
+                Person = person
             });
         }
     }

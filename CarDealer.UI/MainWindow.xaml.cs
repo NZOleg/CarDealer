@@ -24,7 +24,6 @@ namespace CarDealer.UI
     public partial class MainWindow : MetroWindow
     {
         private MainViewModel _viewModel;
-        public Person _currentUser;
 
         public MainWindow( MainViewModel viewModel)
         {
@@ -34,9 +33,9 @@ namespace CarDealer.UI
             Loaded += MainWindow_Loaded;
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            await _viewModel.LoadAsync();
+            _viewModel.Load();
             
         }
     }

@@ -33,10 +33,11 @@ namespace CarDealer.UI.Wrapper
         private void ValidatePropertyInternal(string propertyName, object currentValue)
         {
             ClearErrors(propertyName);
+            ValidateCustomErrors(propertyName);
 
             ValidateDataAnnotations(propertyName, currentValue);
 
-            ValidateCustomErrors(propertyName);
+
         }
 
         private void ValidateDataAnnotations(string propertyName, object currentValue)

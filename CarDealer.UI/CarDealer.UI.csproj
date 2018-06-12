@@ -103,13 +103,18 @@
     <Compile Include="Event\AddEditCarEvent.cs" />
     <Compile Include="Event\AddEditCustomerEvent.cs" />
     <Compile Include="Event\AfterLoginSuccessedEvent.cs" />
+    <Compile Include="Event\AfterLogoutEvent.cs" />
     <Compile Include="Event\OpenCarDetailViewEvent.cs" />
+    <Compile Include="Event\OpenCarListEvent.cs" />
     <Compile Include="Event\OpenCustomerDetailViewEvent.cs" />
     <Compile Include="Event\OpenCustomerListEvent.cs" />
+    <Compile Include="Helpers\MenuItemContainerTemplateSelector.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
+    <Compile Include="ValidationRules.cs" />
     <Compile Include="ViewModel\AddEditCarViewModel.cs" />
     <Compile Include="ViewModel\AddEditCustomerViewModel.cs" />
     <Compile Include="ViewModel\CarDetailViewModel.cs" />
+    <Compile Include="ViewModel\CarFeatureModelView.cs" />
     <Compile Include="ViewModel\CarListItemViewModel.cs" />
     <Compile Include="ViewModel\CarListViewModel.cs" />
     <Compile Include="ViewModel\CustomerDetailViewModel.cs" />
@@ -126,6 +131,7 @@
     <Compile Include="ViewModel\IMenuViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddEditCarView.xaml.cs">

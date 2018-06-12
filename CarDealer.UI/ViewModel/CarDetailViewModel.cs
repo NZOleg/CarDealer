@@ -8,11 +8,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarDealer.UI.ViewModel
 {
     class CarDetailViewModel : ViewModelBase, ICarDetailViewModel
     {
+        private Visibility _editVisibility;
+
+        public Visibility EditVisibility
+        {
+            get { return _editVisibility; }
+            set {
+                _editVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _buyVisibility;
+
+        public Visibility BuyVisibility
+        {
+            get { return _buyVisibility; }
+            set {
+                _buyVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
         private IndividualCar _car;
 
         public IndividualCar Car
@@ -44,10 +69,27 @@ namespace CarDealer.UI.ViewModel
             });
         }
 
-        public async Task LoadAsync(int id)
+        public async Task LoadAsync(int id, string role)
         {
             Car = await _carRepository.GetByIdAsync(id);
+            SetLayoutForCurrentUser(role);
+        }
 
+        private void SetLayoutForCurrentUser(string role)
+        {
+            switch (role)
+            {
+                case "admin":
+                case "staff":
+                    EditVisibility = Visibility.Visible;
+                    BuyVisibility = Visibility.Hidden;
+                    break;
+                case "customer":
+                default:
+                    EditVisibility = Visibility.Hidden;
+                    BuyVisibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }

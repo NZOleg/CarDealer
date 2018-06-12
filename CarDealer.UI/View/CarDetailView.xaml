@@ -37,8 +37,9 @@
         <Label Content="Number Of Seats:"/>
         <Label Content="Status:"/>
         </StackPanel>
-        
-        <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditCarViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
+
+        <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditCarViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Visibility="{Binding EditVisibility}"/>
+        <Button Grid.Column="2" Grid.Row="1"  Content="Buy" Command="{Binding BuyCarCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Visibility="{Binding BuyVisibility}"/>
         <StackPanel Grid.Column="1" Grid.Row="1">
         <Label Grid.Column="1"  Content="{Binding Car.Colour}"/>
         <Label Content="{Binding Car.Current_Mileage}"/>

@@ -2,6 +2,7 @@ namespace CarDealer.DataAccess
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -9,10 +10,9 @@ namespace CarDealer.DataAccess
     [Table("CarModel")]
     public partial class CarModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarModel()
         {
-            IndividualCars = new HashSet<IndividualCar>();
+            IndividualCars = new Collection<IndividualCar>();
         }
 
         [Key]
@@ -26,11 +26,10 @@ namespace CarDealer.DataAccess
         [StringLength(50)]
         public string Manufacturer { get; set; }
 
-        public int NumberOfSeats { get; set; }
+        public int? NumberOfSeats { get; set; }
 
-        public double EngineSize { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public double? EngineSize { get; set; }
+        
         public virtual ICollection<IndividualCar> IndividualCars { get; set; }
     }
 }
