@@ -48,20 +48,62 @@ namespace CarDealer.UI.Data.Repositories
             return role;
         }
 
-        public async Task<Person> GetCustomerByIdAsync(int id)
+        public async Task<Customer> GetCustomerByIdAsync(int id)
         {
-            Person person =  await Context.People.Where(p => p.PersonID == id).SingleOrDefaultAsync();
+            Customer person =  await Context.Customers.Where(p => p.CustomerID == id).SingleOrDefaultAsync();
             return person;
         }
 
-        public async Task<ICollection<Person>> GetAllCustomersAsync()
+        public async Task<Collection<Customer>> GetAllCustomersAsync()
         {
-            ICollection<Person> people = await Context.People.Where(p => p.Customer != null).ToListAsync();
-            return people;
+            return new Collection<Customer>(await Context.Customers.ToListAsync());
+            
         }
-        public void AddCustomer(Person customer)
+
+        public async Task AddNewSaleAsync(int carID, int customerID, Cars_Sold cars_Sold)
         {
-            Context.People.Add(customer);
+            IndividualCar car = await Context.IndividualCars.Where(ic => ic.CarID == carID).SingleAsync();
+            Customer customer = await Context.Customers.Where(c => c.CustomerID == customerID).SingleAsync();
+            cars_Sold.IndividualCar = car;
+            customer.Cars_Sold.Add(cars_Sold);
+             await SaveAsync();
+        }
+        public void AddCustomer(Customer customer)
+        {
+            Context.Customers.Add(customer);
+        }
+        public void AddEmployee(Employee employee)
+        {
+            Context.Employees.Add(employee);
+        }
+        public void RemoveCustomer(Customer customer)
+        {
+
+            Context.Customers.Remove(customer);
+            Context.People.Remove(customer.Person);
+        }
+        public void RemoveEmployee(Employee employee)
+        {
+
+            Context.Employees.Remove(employee);
+            Context.People.Remove(employee.Person);
+        }
+
+        public async Task<Collection<Employee>> GetAllEmployeesAsync()
+        {
+            return new Collection<Employee>(await Context.Employees.ToListAsync());
+        }
+
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        {
+            Employee person = await Context.Employees.Where(p => p.EmployeeID == id).SingleOrDefaultAsync();
+            return person;
+        }
+
+        public async Task<Collection<Cars_Sold>> GetAllCustomerCars(int id)
+        {
+            var cars = await Context.Cars_Sold.Where(cs => cs.Customer.CustomerID == id).ToListAsync();
+            return new Collection<Cars_Sold>(cars);
         }
     }
 }

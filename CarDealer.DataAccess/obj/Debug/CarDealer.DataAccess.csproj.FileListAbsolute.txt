@@ -17,3 +17,6 @@ C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataA
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.csproj.GenerateResource.cache
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.virtualFix.resources
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.nullableAdded.resources
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.AskingPriceAdded.resources
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.MoneyToInt.resources
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.AgeToInt.resources

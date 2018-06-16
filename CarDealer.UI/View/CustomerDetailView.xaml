@@ -36,7 +36,7 @@
 
         </StackPanel>
 
-        <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditCarViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
+        <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditCustomerViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
         <StackPanel Grid.Column="1" Grid.Row="1">
             <Label Content="{Binding Person.Name}"/>
 

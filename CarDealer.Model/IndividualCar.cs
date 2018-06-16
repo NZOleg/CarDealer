@@ -44,6 +44,9 @@ namespace CarDealer.DataAccess
         [StringLength(50)]
         public string Body_Type { get; set; }
 
+        [Required]
+        public int AskingPrice { get; set; }
+
 
         public virtual CarModel CarModel { get; set; }
 

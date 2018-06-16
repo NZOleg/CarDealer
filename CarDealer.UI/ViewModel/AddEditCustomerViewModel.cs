@@ -1,13 +1,16 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.Event;
 using CarDealer.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CarDealer.UI.ViewModel
 {
@@ -36,56 +39,56 @@ namespace CarDealer.UI.ViewModel
                 {
                     _hasChanges = value;
                     OnPropertyChanged();
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                    ((DelegateCommand<PasswordBox>)SaveCommand).RaiseCanExecuteChanged();
                 }
             }
         }
 
         private IEventAggregator _eventAggregator;
 
-        public DelegateCommand SaveCommand { get; }
+        public DelegateCommand<PasswordBox> SaveCommand { get; }
         public DelegateCommand DeleteCommand { get; }
 
         public AddEditCustomerViewModel(IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            SaveCommand = new DelegateCommand(OnSaveCommandExecute);
+            SaveCommand = new DelegateCommand<PasswordBox>(OnSaveCommandExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _personRepository = personRepository;
         }
 
         private async void OnDeleteCommandExecute()
         {
-            _personRepository.Remove(Customer.Model);
+            _personRepository.RemoveCustomer(Customer.Model);
             await _personRepository.SaveAsync();
         }
 
-        private async void OnSaveCommandExecute()
+        private async void OnSaveCommandExecute( PasswordBox password)
         {
-            _personRepository.AddCustomer(Customer.Model);
+            Customer.Person.Password = password.Password;
             await _personRepository.SaveAsync();
+            
+            _eventAggregator.GetEvent<OpenMainPageEvent>().Publish(new OpenMainPageEventArgs());
 
         }
 
         public async Task LoadAsync(int? id)
         {
-            int customerId;
-            if (id == null)
+            Customer customer;
+            if(id == null)
             {
-                Customer = new CustomerWrapper(new Person
-                {
-                    Employee = null,
-                    Customer = new Customer()
-                });
+                customer = createNewCustomer();
             }
             else
             {
-                //converting int? into int
-                customerId = (int)id;
-                Person person = await _personRepository.GetByIdAsync(customerId);
-                Customer = new CustomerWrapper(person);
+                customer = await _personRepository.GetCustomerByIdAsync( (int) id);
             }
+            InitializeCustomer(customer);
+        }
 
+        private void InitializeCustomer(Customer customer)
+        {
+            Customer = new CustomerWrapper(customer);
             Customer.PropertyChanged += (s, e) =>
             {
                 if (!HasChanges)
@@ -94,12 +97,22 @@ namespace CarDealer.UI.ViewModel
                 }
                 if (e.PropertyName == nameof(Customer.HasErrors))
                 {
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                    ((DelegateCommand<PasswordBox>)SaveCommand).RaiseCanExecuteChanged();
                 }
             };
-            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+            ((DelegateCommand<PasswordBox>)SaveCommand).RaiseCanExecuteChanged();
         }
 
+        private Customer createNewCustomer()
+        {
+            Customer customer = new Customer
+            {
+                Person = new Person(),
+                Cars_Sold = new Collection<Cars_Sold>()
+            };
+            _personRepository.AddCustomer(customer);
+            return customer;
+        }
     }
 
 }

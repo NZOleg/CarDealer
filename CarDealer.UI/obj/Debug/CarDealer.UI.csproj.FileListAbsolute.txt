@@ -68,3 +68,17 @@ C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\CustomerDetailView
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\CustomerDetailView.baml
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\AddEditCustomerView.g.cs
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\AddEditCustomerView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\CheckoutView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\CheckoutView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\SalesListView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\SalesListView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\SaleDetailView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\SaleDetailView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\AddEditEmployeeView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\EmployeeListView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\AddEditEmployeeView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\EmployeeListView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\EmployeeDetailView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\EmployeeDetailView.baml
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\MyCarsView.g.cs
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\obj\Debug\View\MyCarsView.baml

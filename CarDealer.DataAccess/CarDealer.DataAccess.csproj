@@ -62,6 +62,18 @@
     <Compile Include="Migrations\201806120523325_nullableAdded.Designer.cs">
       <DependentUpon>201806120523325_nullableAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806122116274_AskingPriceAdded.cs" />
+    <Compile Include="Migrations\201806122116274_AskingPriceAdded.Designer.cs">
+      <DependentUpon>201806122116274_AskingPriceAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806122128551_MoneyToInt.cs" />
+    <Compile Include="Migrations\201806122128551_MoneyToInt.Designer.cs">
+      <DependentUpon>201806122128551_MoneyToInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806130346048_AgeToInt.cs" />
+    <Compile Include="Migrations\201806130346048_AgeToInt.Designer.cs">
+      <DependentUpon>201806130346048_AgeToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +99,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806120523325_nullableAdded.resx">
       <DependentUpon>201806120523325_nullableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806122116274_AskingPriceAdded.resx">
+      <DependentUpon>201806122116274_AskingPriceAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806122128551_MoneyToInt.resx">
+      <DependentUpon>201806122128551_MoneyToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806130346048_AgeToInt.resx">
+      <DependentUpon>201806130346048_AgeToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

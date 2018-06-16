@@ -39,6 +39,9 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Button Content="File" Command="{Binding SaveImage}"></Button>
+        </Grid>
         <Grid Margin="0 20 0 0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -65,7 +68,7 @@
             <TextBox Grid.Row="1"  Grid.Column="1" Width="260" Text="{Binding Car.Current_Mileage,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Date Imported:" Margin="10 5" />
-            <toolkit:DateTimePicker Grid.Row="2"  Grid.Column="1" Width="260" Value="{Binding Car.Date_Imported,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+            <DatePicker Grid.Row="2"  Grid.Column="1" Width="260" SelectedDate="{Binding Car.Date_Imported,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Manufacture Year:" Margin="10 5" />
             <TextBox Grid.Row="3"  Grid.Column="1" Width="260"  Margin="10 5">
                 <Binding Path="Car.Manufacture_Year"
@@ -89,7 +92,7 @@
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="8" Grid.Column="0" Content="Engine Size:" Margin="10 5" />
             <TextBox Grid.Row="8"  Grid.Column="1" Width="260" Text="{Binding Car.CarModel.EngineSize,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0.0}}" Margin="10 5" />
             <Label Grid.Row="9" Grid.Column="0" Content="Number Of Seats:" Margin="10 5" />
             <TextBox Grid.Row="9"  Grid.Column="1" Width="260" Text="{Binding Car.CarModel.NumberOfSeats,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>

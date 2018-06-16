@@ -31,6 +31,7 @@ namespace CarDealer.UI.ViewModel
         public CarFeatureModelView(CarFeature carFeature)
         {
             CarFeature = carFeature;
+            IsChecked = false;
         }
     }
 }

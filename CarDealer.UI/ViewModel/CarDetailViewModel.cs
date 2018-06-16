@@ -40,6 +40,8 @@ namespace CarDealer.UI.ViewModel
 
         private IndividualCar _car;
 
+        public Customer Customer { get; private set; }
+
         public IndividualCar Car
         {
             get { return _car; }
@@ -51,14 +53,26 @@ namespace CarDealer.UI.ViewModel
 
         private IEventAggregator _eventAggregator;
         private ICarRepository _carRepository;
+        private IPersonRepository _personRepository;
 
         public DelegateCommand EditCarViewCommand { get; private set; }
+        public DelegateCommand BuyCarCommand { get; private set; }
 
-        public CarDetailViewModel(ICarRepository carRepository, IEventAggregator eventAggregator)
+        public CarDetailViewModel(ICarRepository carRepository, IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _carRepository = carRepository;
+            _personRepository = personRepository;
             EditCarViewCommand = new DelegateCommand(EditCarViewExecute);
+            BuyCarCommand = new DelegateCommand(BuyCarExecute);
+        }
+
+        private void BuyCarExecute()
+        {
+            _eventAggregator.GetEvent<OpenCheckoutEvent>().Publish(new OpenCheckoutEventArgs
+            {
+                Id = Car.CarID
+            });
         }
 
         private void EditCarViewExecute()
@@ -69,8 +83,13 @@ namespace CarDealer.UI.ViewModel
             });
         }
 
-        public async Task LoadAsync(int id, string role)
+        public async Task LoadAsync(int id, Person person)
         {
+            string role = await _personRepository.GetPersonRole(person.PersonID);
+            if (role == "customer")
+            {
+                Customer = await _personRepository.GetCustomerByIdAsync(person.PersonID);
+            }
             Car = await _carRepository.GetByIdAsync(id);
             SetLayoutForCurrentUser(role);
         }

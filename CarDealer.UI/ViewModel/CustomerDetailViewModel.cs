@@ -13,9 +13,9 @@ namespace CarDealer.UI.ViewModel
 {
     class CustomerDetailViewModel : ViewModelBase, ICustomerDetailViewModel
     {
-        private Person _person;
+        private Customer _person;
 
-        public Person Person
+        public Customer Person
         {
             get { return _person; }
             set
@@ -28,20 +28,20 @@ namespace CarDealer.UI.ViewModel
         private IEventAggregator _eventAggregator;
         private IPersonRepository _personRepository;
 
-        public DelegateCommand EditCarViewCommand { get; private set; }
+        public DelegateCommand EditCustomerViewCommand { get; private set; }
 
         public CustomerDetailViewModel(IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _personRepository = personRepository;
-            EditCarViewCommand = new DelegateCommand(EditCustomerViewExecute);
+            EditCustomerViewCommand = new DelegateCommand(EditCustomerViewExecute);
         }
 
         private void EditCustomerViewExecute()
         {
             _eventAggregator.GetEvent<AddEditCustomerEvent>().Publish(new AddEditCustomerEventArgs
             {
-                Id = Person.PersonID
+                Id = Person.CustomerID
             });
         }
 

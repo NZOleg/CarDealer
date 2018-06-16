@@ -11,8 +11,8 @@ namespace CarDealer.DataAccess
         [Key]
         public int Car_Sold_ID { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal Sale_Price { get; set; }
+        [Required]
+        public int Sale_Price { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Date_Sold { get; set; }

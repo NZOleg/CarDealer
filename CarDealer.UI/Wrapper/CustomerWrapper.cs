@@ -7,35 +7,10 @@ using System.Threading.Tasks;
 
 namespace CarDealer.UI.Wrapper
 {
-    class CustomerWrapper : ModelWrapper<Person>
+    class CustomerWrapper : ModelWrapper<Customer>
     {
-        public CustomerWrapper(Person model) : base(model)
+        public CustomerWrapper(Customer model) : base(model)
         {
-        }
-        public int PersonID
-        {
-            get { return GetValue<int>(); }
-        }
-        public string Name
-        {
-            get { return GetValue<string>(); }
-            set { SetValue(value); }
-        }
-        public string Address
-        {
-            get { return GetValue<string>(); }
-            set { SetValue(value); }
-        }
-        public string Telephone
-        {
-            get { return GetValue<string>(); }
-            set { SetValue(value); }
-        }
-
-        public string Username
-        {
-            get { return GetValue<string>(); }
-            set { SetValue(value); }
         }
         public string Licence_Number
         {
@@ -52,14 +27,15 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<DateTime>(); }
             set { SetValue(value); }
         }
+
         public ICollection<Cars_Sold> Cars_Sold
         {
             get { return GetValue<ICollection<Cars_Sold>>(); }
             set { SetValue(value); }
         }
-        public Customer Customer
+        public Person Person
         {
-            get { return GetValue<Customer>(); }
+            get { return GetValue<Person>(); }
             set { SetValue(value); }
         }
     }

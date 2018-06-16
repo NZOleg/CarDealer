@@ -1,4 +1,5 @@
-﻿using CarDealer.UI.Event;
+﻿using CarDealer.DataAccess;
+using CarDealer.UI.Event;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -16,21 +17,78 @@ namespace CarDealer.UI.ViewModel
         private IEventAggregator _eventAggregator;
 
         public ICommand CreateNewCarCommand { get; set; }
+        public DelegateCommand<object> CreateNewCustomerCommand { get; }
+        public DelegateCommand<object> CreateNewEmployeeCommand { get; }
         public DelegateCommand<object> ShowCustomerListCommand { get; }
+        public DelegateCommand<object> ShowEmployeeListCommand { get; }
         public DelegateCommand<object> ShowCarListCommand { get; }
+        public DelegateCommand<object> ShowSaleListCommand { get; }
         public DelegateCommand<object> LogoutCommand { get; }
+        public DelegateCommand<object> ShowMyProfileCommand { get; }
+        public DelegateCommand<object> ShowMyCarsCommand { get; }
         public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
+        public Person Person { get; private set; }
 
         public MenuViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             CreateNewCarCommand = new DelegateCommand<object>(OnCreateNewCarExecute);
+            CreateNewCustomerCommand = new DelegateCommand<object>(OnCreateNewCustomerExecute);
+            CreateNewEmployeeCommand = new DelegateCommand<object>(OnCreateNewEmployeeExecute);
             ShowCustomerListCommand = new DelegateCommand<object>(ShowCustomerListExecute);
+            ShowEmployeeListCommand = new DelegateCommand<object>(ShowEmployeeListExecute);
             ShowCarListCommand = new DelegateCommand<object>(ShowCarListExecute);
+            ShowSaleListCommand = new DelegateCommand<object>(ShowSaleListExecute);
             LogoutCommand = new DelegateCommand<object>(LogoutExecute);
+            ShowMyProfileCommand = new DelegateCommand<object>(ShowMyProfileExecute);
+            ShowMyCarsCommand = new DelegateCommand<object>(ShowMyCarsExecute);
         }
-        public void Load(string role)
+
+        private void ShowMyCarsExecute(object obj)
         {
+            _eventAggregator.GetEvent<ShowMyCarsEvent>().Publish(new ShowMyCarsEventArgs
+            {
+                Id = Person.PersonID
+            });
+        }
+
+        private void ShowMyProfileExecute(object obj)
+        {
+            _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>().Publish(new OpenCustomerDetailViewEventArgs
+            {
+                Id = Person.PersonID
+            });
+        }
+
+        private void ShowEmployeeListExecute(object obj)
+        {
+            _eventAggregator.GetEvent<OpenEmployeeListEvent>().Publish(new OpenEmployeeListEventArgs());
+        }
+
+        private void OnCreateNewCustomerExecute(object obj)
+        {
+            _eventAggregator.GetEvent<AddEditCustomerEvent>().Publish(new AddEditCustomerEventArgs
+            {
+                Id = null
+            });
+        }
+
+        private void OnCreateNewEmployeeExecute(object obj)
+        {
+            _eventAggregator.GetEvent<AddEditEmployeeEvent>().Publish(new AddEditEmployeeEventArgs
+            {
+                Id = null
+            });
+        }
+
+        private void ShowSaleListExecute(object obj)
+        {
+            _eventAggregator.GetEvent<OpenSaleListEvent>().Publish(new OpenSaleListEventArgs());
+        }
+
+        public void Load(string role, Person person)
+        {
+            Person = person;
             switch (role)
             {
                  case "admin": MenuItems = GetAdminMenu();
@@ -51,8 +109,8 @@ namespace CarDealer.UI.ViewModel
             ObservableCollection<MenuItemViewModel> customerMenuItems = new ObservableCollection<MenuItemViewModel>
             {
                 new MenuItemViewModel("List of Cars", ShowCarListCommand),
-                new MenuItemViewModel("My Profile", ShowCarListCommand),
-                new MenuItemViewModel("My Cars", ShowCarListCommand),
+                new MenuItemViewModel("My Profile", ShowMyProfileCommand),
+                new MenuItemViewModel("My Cars", ShowMyCarsCommand),
                 new MenuItemViewModel("Logout", LogoutCommand)
 
             };
@@ -62,15 +120,10 @@ namespace CarDealer.UI.ViewModel
 
         private ObservableCollection<MenuItemViewModel> GetStaffMenu()
         {
-            throw new NotImplementedException();
-        }
-
-        private ObservableCollection<MenuItemViewModel> GetAdminMenu()
-        {
             ObservableCollection<MenuItemViewModel> adminMenuItems = new ObservableCollection<MenuItemViewModel>();
             ObservableCollection<MenuItemViewModel> saleMenuItems = new ObservableCollection<MenuItemViewModel>()
             {
-                new MenuItemViewModel("List of Sold Cars"),
+                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand),
                 new MenuItemViewModel("Statistics"),
             };
             ObservableCollection<MenuItemViewModel> carMenuItems = new ObservableCollection<MenuItemViewModel>
@@ -81,13 +134,39 @@ namespace CarDealer.UI.ViewModel
             };
             ObservableCollection<MenuItemViewModel> CustomerMenuItems = new ObservableCollection<MenuItemViewModel>
             {
-                new MenuItemViewModel("Add a New Customer", CreateNewCarCommand),
-                new MenuItemViewModel("Display All Customer", ShowCarListCommand),
+                new MenuItemViewModel("Add a New Customer", CreateNewCustomerCommand),
+                new MenuItemViewModel("Display All Customer", ShowCustomerListCommand),
+            };
+            adminMenuItems.Add(new MenuItemViewModel("Cars", null, carMenuItems));
+            adminMenuItems.Add(new MenuItemViewModel("Sales", null, saleMenuItems));
+            adminMenuItems.Add(new MenuItemViewModel("Customers", null, CustomerMenuItems));
+            adminMenuItems.Add(new MenuItemViewModel("Logout", LogoutCommand));
+            return adminMenuItems;
+        }
+
+        private ObservableCollection<MenuItemViewModel> GetAdminMenu()
+        {
+            ObservableCollection<MenuItemViewModel> adminMenuItems = new ObservableCollection<MenuItemViewModel>();
+            ObservableCollection<MenuItemViewModel> saleMenuItems = new ObservableCollection<MenuItemViewModel>()
+            {
+                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand),
+                new MenuItemViewModel("Statistics"),
+            };
+            ObservableCollection<MenuItemViewModel> carMenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new MenuItemViewModel("Add a New Car", CreateNewCarCommand),
+                new MenuItemViewModel("Display All Cars", ShowCarListCommand),
+                new MenuItemViewModel("Car Models")
+            };
+            ObservableCollection<MenuItemViewModel> CustomerMenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new MenuItemViewModel("Add a New Customer", CreateNewCustomerCommand),
+                new MenuItemViewModel("Display All Customer", ShowCustomerListCommand),
             };
             ObservableCollection<MenuItemViewModel> EmployeeMenuItems = new ObservableCollection<MenuItemViewModel>
             {
-                new MenuItemViewModel("Add a New Employee", CreateNewCarCommand),
-                new MenuItemViewModel("Display All Employees", ShowCarListCommand)
+                new MenuItemViewModel("Add a New Employee", CreateNewEmployeeCommand),
+                new MenuItemViewModel("Display All Employees", ShowEmployeeListCommand)
             };
             adminMenuItems.Add(new MenuItemViewModel("Cars", null, carMenuItems));
             adminMenuItems.Add(new MenuItemViewModel("Sales", null, saleMenuItems));

@@ -55,9 +55,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -102,37 +99,61 @@
     <Compile Include="Data\Repositories\PersonRepository.cs" />
     <Compile Include="Event\AddEditCarEvent.cs" />
     <Compile Include="Event\AddEditCustomerEvent.cs" />
+    <Compile Include="Event\AddEditEmployeeEvent.cs" />
     <Compile Include="Event\AfterLoginSuccessedEvent.cs" />
     <Compile Include="Event\AfterLogoutEvent.cs" />
     <Compile Include="Event\OpenCarDetailViewEvent.cs" />
     <Compile Include="Event\OpenCarListEvent.cs" />
+    <Compile Include="Event\OpenCheckoutEvent.cs" />
     <Compile Include="Event\OpenCustomerDetailViewEvent.cs" />
     <Compile Include="Event\OpenCustomerListEvent.cs" />
+    <Compile Include="Event\OpenEmployeeDetailViewEvent.cs" />
+    <Compile Include="Event\OpenEmployeeListEvent.cs" />
+    <Compile Include="Event\OpenMainPageEvent.cs" />
+    <Compile Include="Event\OpenSaleDetailViewEvent.cs" />
+    <Compile Include="Event\OpenSaleListEvent.cs" />
+    <Compile Include="Event\ShowMyCarsEvent.cs" />
     <Compile Include="Helpers\MenuItemContainerTemplateSelector.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ValidationRules.cs" />
     <Compile Include="ViewModel\AddEditCarViewModel.cs" />
     <Compile Include="ViewModel\AddEditCustomerViewModel.cs" />
+    <Compile Include="ViewModel\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\CarDetailViewModel.cs" />
     <Compile Include="ViewModel\CarFeatureModelView.cs" />
     <Compile Include="ViewModel\CarListItemViewModel.cs" />
     <Compile Include="ViewModel\CarListViewModel.cs" />
+    <Compile Include="ViewModel\CheckoutViewModel.cs" />
     <Compile Include="ViewModel\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModel\CustomerListItemViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeListItemViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\IAddEditCarViewModel.cs" />
     <Compile Include="ViewModel\IAddEditCustomerViewModel.cs" />
+    <Compile Include="ViewModel\IAddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\ICarDetailViewModel.cs" />
     <Compile Include="ViewModel\ICarListItemViewModel.cs" />
     <Compile Include="ViewModel\ICarListViewModel.cs" />
+    <Compile Include="ViewModel\ICheckoutViewModel.cs" />
     <Compile Include="ViewModel\ICustomerDetailViewModel.cs" />
     <Compile Include="ViewModel\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\IEmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModel\IEmployeeListViewModel.cs" />
     <Compile Include="ViewModel\ILoginViewModel.cs" />
     <Compile Include="ViewModel\IMenuViewModel.cs" />
+    <Compile Include="ViewModel\IMyCarsViewModel.cs" />
+    <Compile Include="ViewModel\ISaleDetailViewModel.cs" />
+    <Compile Include="ViewModel\ISaleListViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\MyCarsViewModel.cs" />
+    <Compile Include="ViewModel\SaleDetailViewModel.cs" />
+    <Compile Include="ViewModel\SaleListItemViewModel.cs" />
+    <Compile Include="ViewModel\SaleListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddEditCarView.xaml.cs">
       <DependentUpon>AddEditCarView.xaml</DependentUpon>
@@ -140,11 +161,17 @@
     <Compile Include="View\AddEditCustomerView.xaml.cs">
       <DependentUpon>AddEditCustomerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditEmployeeView.xaml.cs">
+      <DependentUpon>AddEditEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CarDetailView.xaml.cs">
       <DependentUpon>CarDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CarListView.xaml.cs">
       <DependentUpon>CarListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheckoutView.xaml.cs">
+      <DependentUpon>CheckoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
@@ -152,14 +179,30 @@
     <Compile Include="View\CustomerListView.xaml.cs">
       <DependentUpon>CustomerListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmployeeDetailView.xaml.cs">
+      <DependentUpon>EmployeeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeeListView.xaml.cs">
+      <DependentUpon>EmployeeListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MyCarsView.xaml.cs">
+      <DependentUpon>MyCarsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SaleDetailView.xaml.cs">
+      <DependentUpon>SaleDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SalesListView.xaml.cs">
+      <DependentUpon>SalesListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wrapper\CarWrapper.cs" />
     <Compile Include="Wrapper\CustomerWrapper.cs" />
+    <Compile Include="Wrapper\EmployeeWrapper.cs" />
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -182,11 +225,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddEditEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CarDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CarListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheckoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,11 +249,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EmployeeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeeListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MyCarsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SaleDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SalesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +317,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Lookups\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

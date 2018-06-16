@@ -20,6 +20,7 @@ namespace CarDealer.UI.ViewModel
         private IPersonRepository _personRepository;
 
         public ICommand LoginUserCommand { get; set; }
+        public ICommand CreateAccountCommand { get; set; }
         public string UserName { get; set; }
 
         public LoginViewModel(IPersonRepository personRepository, IEventAggregator eventAggregator)
@@ -27,6 +28,15 @@ namespace CarDealer.UI.ViewModel
             _eventAggregator = eventAggregator;
             _personRepository = personRepository;
             LoginUserCommand = new DelegateCommand<PasswordBox>(OnLoginExecute);
+            CreateAccountCommand = new DelegateCommand<Object>(OnCreateAccountExecute);
+        }
+
+        private void OnCreateAccountExecute(object obj)
+        {
+            _eventAggregator.GetEvent<AddEditCustomerEvent>().Publish(new AddEditCustomerEventArgs
+            {
+                Id = null
+            });
         }
 
         private async void OnLoginExecute(PasswordBox password)

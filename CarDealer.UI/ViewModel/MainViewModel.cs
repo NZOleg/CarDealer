@@ -35,14 +35,21 @@ namespace CarDealer.UI.ViewModel
             }
         }
 
+        private Func<IMyCarsViewModel> _myCarsViewModelCreator;
         private Func<IAddEditCarViewModel> _addEditCarViewModelCreator;
         private Func<ILoginViewModel> _loginViewModelCreator;
+        private Func<ICheckoutViewModel> _checkoutViewModelCreator;
         private Func<IAddEditCustomerViewModel> _addEditCustomerViewModelCreator;
+        private Func<IAddEditEmployeeViewModel> _addEditEmployeeViewModelCreator;
         private Func<ICustomerListViewModel> _customerListViewModelCreator;
+        private Func<IEmployeeListViewModel> _employeeListViewModelCreator;
         private Func<IMenuViewModel> _menuViewModelCreator;
         private Func<ICarListViewModel> _carListViewModelCreator;
         private Func<ICarDetailViewModel> _carDetailViewModelCreator;
+        private Func<ISaleDetailViewModel> _saleDetailViewModelCreator;
         private Func<ICustomerDetailViewModel> _customerDetailViewModelCreator;
+        private Func<IEmployeeDetailViewModel> _employeeDetailViewModelCreator;
+        private Func<ISaleListViewModel> _saleListViewModelCreator;
         private dynamic _currentView;
 
         public dynamic CurrentView
@@ -71,85 +78,177 @@ namespace CarDealer.UI.ViewModel
         public MainViewModel(IPersonRepository personRepository, ILoginViewModel loginViewModel,
             Func<ICarListViewModel> carListViewModelCreator, Func<IMenuViewModel> menuViewModelCreator,
             Func<IAddEditCarViewModel> addEditCarViewModelCreator, Func<ICarDetailViewModel> carDetailViewModelCreator,
-            Func<ICustomerListViewModel> customerListViewModelCreator, Func<ICustomerDetailViewModel> customerDetailViewModelCreator,
-            Func<IAddEditCustomerViewModel> addEditCustomerViewModelCreator, Func<ILoginViewModel> loginViewModelCreator, IEventAggregator eventAggregator)
+            Func<ICustomerListViewModel> customerListViewModelCreator,Func<IEmployeeListViewModel> employeeListViewModelCreator, Func<ICustomerDetailViewModel> customerDetailViewModelCreator,
+            Func<IAddEditCustomerViewModel> addEditCustomerViewModelCreator,Func<ILoginViewModel> loginViewModelCreator,
+
+            Func<IAddEditEmployeeViewModel> addEditEmployeeViewModelCreator,
+            Func<ICheckoutViewModel> checkoutViewModelCreator, Func<ISaleListViewModel> saleListViewModelCreator,
+            Func<ISaleDetailViewModel> saleDetailViewModelCreator, Func<IEmployeeDetailViewModel> employeeDetailViewModelCreator,
+            Func<IMyCarsViewModel> myCarsViewModelCreator,
+            IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _personRepository = personRepository;
             
             LoginViewModel = loginViewModel;
-
+            _myCarsViewModelCreator = myCarsViewModelCreator;
             _addEditCarViewModelCreator = addEditCarViewModelCreator;
             _loginViewModelCreator = loginViewModelCreator;
+            _checkoutViewModelCreator = checkoutViewModelCreator;
             _addEditCustomerViewModelCreator = addEditCustomerViewModelCreator;
+            _addEditEmployeeViewModelCreator = addEditEmployeeViewModelCreator;
             _customerListViewModelCreator = customerListViewModelCreator;
+            _employeeListViewModelCreator = employeeListViewModelCreator;
             _menuViewModelCreator = menuViewModelCreator;
             _carListViewModelCreator = carListViewModelCreator;
             _carDetailViewModelCreator = carDetailViewModelCreator;
+            _saleDetailViewModelCreator = saleDetailViewModelCreator;
             _customerDetailViewModelCreator = customerDetailViewModelCreator;
+            _employeeDetailViewModelCreator = employeeDetailViewModelCreator;
+            _saleListViewModelCreator = saleListViewModelCreator;
 
             people = new ObservableCollection<Person>();
             _eventAggregator.GetEvent<AfterLoginSuccessedEvent>()
                 .Subscribe(AfterLoginSuccessed);
             _eventAggregator.GetEvent<AddEditCustomerEvent>()
-                .Subscribe(AddEditCustomer);
+                .Subscribe(AddEditCustomerAsync);
+            _eventAggregator.GetEvent<AddEditEmployeeEvent>()
+                .Subscribe(AddEditEmployeeAsync);
             _eventAggregator.GetEvent<AddEditCarEvent>()
-                .Subscribe(AddEditCar);
+                .Subscribe(AddEditCarAsync);
             _eventAggregator.GetEvent<OpenCarDetailViewEvent>()
-                .Subscribe(OpenCarDetails);
+                .Subscribe(OpenCarDetailsAsync);
             _eventAggregator.GetEvent<OpenCustomerListEvent>()
-                .Subscribe(OpenCustomerList);
+                .Subscribe(OpenCustomerListAsync);
+            _eventAggregator.GetEvent<OpenEmployeeListEvent>()
+                .Subscribe(OpenEmployeeListAsync);
             _eventAggregator.GetEvent<OpenCarListEvent>()
-                .Subscribe(OpenCarList);
+                .Subscribe(OpenCarListAsync);
             _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>()
-                .Subscribe(OpenCustomerDetails);
+                .Subscribe(OpenCustomerDetailsAsync);
+            _eventAggregator.GetEvent<OpenEmployeeDetailViewEvent>()
+                .Subscribe(OpenEmployeeDetailsAsync);
+            _eventAggregator.GetEvent<OpenSaleDetailViewEvent>()
+                .Subscribe(OpenSaleDetailsAsync);
             _eventAggregator.GetEvent<AfterLogoutEvent>()
                 .Subscribe(OpenLoginPage);
+            _eventAggregator.GetEvent<OpenCheckoutEvent>()
+                .Subscribe(OpenCheckoutPageAsync);
+            _eventAggregator.GetEvent<OpenSaleListEvent>()
+                .Subscribe(OpenSalePageAsync);
+            _eventAggregator.GetEvent<OpenMainPageEvent>()
+                .Subscribe(OpenMainPageAsync);
+            _eventAggregator.GetEvent<ShowMyCarsEvent>()
+                .Subscribe(OpenMyCarsAsync);
 
+        }
+
+        private async void OpenMyCarsAsync(ShowMyCarsEventArgs obj)
+        {
+            CurrentView = _myCarsViewModelCreator();
+            await CurrentView.LoadAsync(CurrentUser.PersonID);
+        }
+
+        private async void OpenMainPageAsync(OpenMainPageEventArgs obj)
+        {
+            if (CurrentUser == null)
+            {
+                LoginViewModel = _loginViewModelCreator();
+                CurrentView = null;
+                MenuViewModel = null;
+            }
+            else
+            {
+                CurrentView = _carListViewModelCreator();
+                await CurrentView.LoadAsync();
+            }
+
+        }
+
+        private async void AddEditEmployeeAsync(AddEditEmployeeEventArgs obj)
+        {
+            CurrentView = _addEditEmployeeViewModelCreator();
+            await CurrentView.LoadAsync(obj.Id);
+        }
+
+        private async void OpenEmployeeDetailsAsync(OpenEmployeeDetailViewEventArgs obj)
+        {
+            CurrentView = _employeeDetailViewModelCreator();
+            await CurrentView.LoadAsync(obj.Id);
+        }
+
+        private async void OpenSaleDetailsAsync(OpenSaleDetailViewEventArgs obj)
+        {
+            CurrentView = _saleDetailViewModelCreator();
+            await CurrentView.Load(obj.Sale);
+        }
+
+        private async void OpenSalePageAsync(OpenSaleListEventArgs obj)
+        {
+            CurrentView = _saleListViewModelCreator();
+            await CurrentView.LoadAsync();
+        }
+
+        private async void OpenCheckoutPageAsync(OpenCheckoutEventArgs obj)
+        {
+            CurrentView = _checkoutViewModelCreator();
+            await CurrentView.LoadAsync(obj.Id, CurrentUser.PersonID);
         }
 
         private void OpenLoginPage(AfterLogoutEventArgs obj)
         {
-
             CurrentView = null;
             MenuViewModel = null;
             LoginViewModel = _loginViewModelCreator();
 
         }
 
-        private void AddEditCustomer(AddEditCustomerEventArgs obj)
+        private async void AddEditCustomerAsync(AddEditCustomerEventArgs obj)
         {
+            if(CurrentUser == null)
+            {
+                LoginViewModel = null;
+                MenuViewModel = null;
+            }
+
             CurrentView = _addEditCustomerViewModelCreator();
-            CurrentView.LoadAsync(obj.Id);
+            await CurrentView.LoadAsync(obj.Id);
         }
 
-        private void OpenCustomerDetails(OpenCustomerDetailViewEventArgs obj)
+        private async void OpenCustomerDetailsAsync(OpenCustomerDetailViewEventArgs obj)
         {
             CurrentView = _customerDetailViewModelCreator();
-            CurrentView.LoadAsync(obj.Id);
+            await CurrentView.LoadAsync(obj.Id);
         }
 
-        private void OpenCustomerList(OpenCustomerListEventArgs obj)
+        private async void OpenCustomerListAsync(OpenCustomerListEventArgs obj)
         {
             CurrentView = _customerListViewModelCreator();
-            CurrentView.LoadAsync();
+            await CurrentView.LoadAsync();
         }
-        private void OpenCarList(OpenCarListEventArgs obj)
+
+        private async void OpenEmployeeListAsync(OpenEmployeeListEventArgs obj)
+        {
+            CurrentView = _employeeListViewModelCreator();
+            await CurrentView.LoadAsync();
+        }
+
+        private async void OpenCarListAsync(OpenCarListEventArgs obj)
         {
             CurrentView = _carListViewModelCreator();
-            CurrentView.LoadAsync();
+            await CurrentView.LoadAsync();
         }
 
-        private void OpenCarDetails(OpenCarDetailViewEventArgs obj)
+        private async void OpenCarDetailsAsync(OpenCarDetailViewEventArgs obj)
         {
             CurrentView = _carDetailViewModelCreator();
-            CurrentView.LoadAsync(obj.Id, Role);
+            await CurrentView.LoadAsync(obj.Id, CurrentUser);
         }
 
-        private void AddEditCar(AddEditCarEventArgs obj)
+        private async void AddEditCarAsync(AddEditCarEventArgs obj)
         {
             CurrentView = _addEditCarViewModelCreator();
-            CurrentView.LoadAsync(obj.Id);
+            await CurrentView.LoadAsync(obj.Id);
         }
 
         private async void AfterLoginSuccessed(AfterLoginSuccessedEventArgs obj)
@@ -161,8 +260,7 @@ namespace CarDealer.UI.ViewModel
             CurrentView = _carListViewModelCreator();
             await CurrentView.LoadAsync();
             MenuViewModel = _menuViewModelCreator();
-            MenuViewModel.Load(Role);
-            
+            MenuViewModel.Load(Role, CurrentUser);
         }
 
 

@@ -12,14 +12,14 @@ namespace CarDealer.UI.ViewModel
 {
     class CustomerListItemViewModel : ViewModelBase
     {
-        private Person _person;
+        private Customer _customer;
 
-        public Person Person
+        public Customer Customer
         {
-            get { return _person; }
+            get { return _customer; }
             set
             {
-                _person = value;
+                _customer = value;
                 OnPropertyChanged();
             }
         }
@@ -30,13 +30,13 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Person.Username; }
+            get { return Customer.Person.Username; }
         }
 
 
-        public CustomerListItemViewModel(Person person, IEventAggregator eventAggregator)
+        public CustomerListItemViewModel(Customer customer, IEventAggregator eventAggregator)
         {
-            Person = person;
+            Customer = customer;
             _eventAggregator = eventAggregator;
             OpenCustomerDetailViewCommand = new DelegateCommand(OpenCustomerDetailViewExecute);
 
@@ -46,7 +46,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>().Publish(new OpenCustomerDetailViewEventArgs
             {
-                Id = Person.PersonID
+                Id = Customer.CustomerID
             });
         }
     }

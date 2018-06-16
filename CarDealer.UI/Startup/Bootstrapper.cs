@@ -22,10 +22,17 @@ namespace CarDealer.UI.Startup
             builder.RegisterType<MenuViewModel>().As<IMenuViewModel>();
             builder.RegisterType<AddEditCarViewModel>().As<IAddEditCarViewModel>();
             builder.RegisterType<AddEditCustomerViewModel>().As<IAddEditCustomerViewModel>();
+            builder.RegisterType<AddEditEmployeeViewModel>().As<IAddEditEmployeeViewModel>();
             builder.RegisterType<CarDetailViewModel>().As<ICarDetailViewModel>();
+            builder.RegisterType<EmployeeDetailViewModel>().As<IEmployeeDetailViewModel>();
+            builder.RegisterType<SaleDetailViewModel>().As<ISaleDetailViewModel>();
             builder.RegisterType<CustomerDetailViewModel>().As<ICustomerDetailViewModel>();
             builder.RegisterType<CarListViewModel>().As<ICarListViewModel>();
+            builder.RegisterType<EmployeeListViewModel>().As<IEmployeeListViewModel>();
             builder.RegisterType<CustomerListViewModel>().As<ICustomerListViewModel>();
+            builder.RegisterType<CheckoutViewModel>().As<ICheckoutViewModel>();
+            builder.RegisterType<SaleListViewModel>().As<ISaleListViewModel>();
+            builder.RegisterType<MyCarsViewModel>().As<IMyCarsViewModel>();
             builder.RegisterType<CarDealerDbContext>().AsSelf();
             return builder.Build();
         }

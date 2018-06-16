@@ -13,16 +13,7 @@ namespace CarDealer.UI.ViewModel
     
     class CustomerListViewModel : ViewModelBase, ICustomerListViewModel
     {
-        private ObservableCollection<CustomerListItemViewModel> _people;
-
-        public ObservableCollection<CustomerListItemViewModel> People
-        {
-            get { return _people; }
-            set {
-                _people = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<CustomerListItemViewModel> Customers { get; set; }
 
         private IEventAggregator _eventAggregator;
         private IPersonRepository _peopleRepository;
@@ -31,15 +22,15 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator = eventAggregator;
             _peopleRepository = peopleRepository;
-            People = new ObservableCollection<CustomerListItemViewModel>();
+            Customers = new ObservableCollection<CustomerListItemViewModel>();
         }
 
         public async Task LoadAsync()
         {
-            var people = await _peopleRepository.GetAllCustomersAsync();
-            foreach (var person in people)
+            Collection<Customer> customers = await _peopleRepository.GetAllCustomersAsync();
+            foreach (Customer customer in customers)
             {
-                People.Add(new CustomerListItemViewModel(person, _eventAggregator));
+                Customers.Add(new CustomerListItemViewModel(customer, _eventAggregator));
             }
         }
     }

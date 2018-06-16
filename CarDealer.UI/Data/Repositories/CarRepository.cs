@@ -35,9 +35,14 @@ namespace CarDealer.UI.Data.Repositories
             return await Context.CarModels.Where(cm => cm.Manufacturer == carModel.Manufacturer && cm.Model == carModel.Model).SingleAsync();
         }
 
-        public async Task<List<CarFeature>> getAllCarFeatures()
+        public async Task<Collection<CarFeature>> GetAllCarFeatures()
         {
-            return await Context.CarFeatures.ToListAsync();
+            return new Collection<CarFeature>(await Context.CarFeatures.ToListAsync());
+        }
+
+        public async Task<Collection<Cars_Sold>> GetAllSalesAsync()
+        {
+            return new Collection<Cars_Sold>(await Context.Cars_Sold.ToListAsync());
         }
 
         //public async Task<ICollection<CarFeature>> GetCarFeatures(int id)

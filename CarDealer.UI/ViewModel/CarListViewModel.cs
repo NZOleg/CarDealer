@@ -18,7 +18,6 @@ namespace CarDealer.UI.ViewModel
 
 
         public ObservableCollection<CarListItemViewModel> Cars { get; set; }
-        public ObservableCollection<string> CarsStrings { get; set; }
 
         public CarListViewModel(ICarRepository carRepository, IEventAggregator eventAggregator)
         {

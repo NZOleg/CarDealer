@@ -2,6 +2,7 @@
 using CarDealer.UI.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,9 +72,9 @@ namespace CarDealer.UI.Wrapper
             set { SetValue(value); }
         }
 
-        public List<CarFeature> CarFeatures
+        public Collection<CarFeature> CarFeatures
         {
-            get { return GetValue<List<CarFeature>>(); }
+            get { return GetValue<Collection<CarFeature>>(); }
             set { SetValue(value); }
         }
         protected override IEnumerable<string> ValidateProperty(string propertyName)

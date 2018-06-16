@@ -33,8 +33,7 @@ namespace CarDealer.DataAccess
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Cars_Sold>()
-                .Property(e => e.Sale_Price)
-                .HasPrecision(19, 4);
+                .Property(e => e.Sale_Price);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Cars_Sold)

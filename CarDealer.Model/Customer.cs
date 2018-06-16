@@ -23,7 +23,7 @@ namespace CarDealer.DataAccess
         [StringLength(30)]
         public string Licence_Number { get; set; }
 
-        public double Age { get; set; }
+        public int Age { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime License_Expiry_Date { get; set; }

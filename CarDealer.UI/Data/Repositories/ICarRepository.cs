@@ -15,6 +15,7 @@ namespace CarDealer.UI.Data.Repositories
         //Task<CarModel> GetCarModel(int id);
         Task<CarModel> SaveCarModelAsync(CarModel carModel);
         Task<CarModel> CreateOrAssignCarModelAsync(CarModel carModel);
-        Task<List<CarFeature>> getAllCarFeatures();
+        Task<Collection<CarFeature>> GetAllCarFeatures();
+        Task<Collection<Cars_Sold>> GetAllSalesAsync();
     }
 }

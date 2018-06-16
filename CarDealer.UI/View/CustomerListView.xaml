@@ -40,7 +40,7 @@
         <GroupBox  Header="Customers">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="carList" ItemsSource="{Binding People, Mode=TwoWay}"
+                <ItemsControl x:Name="carList" ItemsSource="{Binding Customers, Mode=TwoWay}"
                               ItemTemplate="{StaticResource NaviItemTemplate}"/>
 
             </ScrollViewer>

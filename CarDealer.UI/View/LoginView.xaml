@@ -13,9 +13,10 @@
 
                 <Label Content="Password:"/>
                 <PasswordBox Margin="5" x:Name="password" Height="34"   VerticalAlignment="Top" Width="240"/>
-            
-            
+
+
             <Button Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Log In" CommandParameter="{Binding ElementName=password}" Command="{Binding LoginUserCommand}"  Width="80"/>
+            <Button Content="Don't have an Account? Create one now." FontSize="10" Command="{Binding CreateAccountCommand}" />
         </StackPanel>
         
     </Grid>

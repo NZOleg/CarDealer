@@ -30,13 +30,33 @@
         <DataTemplate DataType="{x:Type viewModel:CustomerDetailViewModel}">
             <view:CustomerDetailView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SaleDetailViewModel}">
+            <view:SaleDetailView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:CustomerListViewModel}">
             <view:CustomerListView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AddEditCustomerViewModel}">
             <view:AddEditCustomerView/>
         </DataTemplate>
-        
+        <DataTemplate DataType="{x:Type viewModel:AddEditEmployeeViewModel}">
+            <view:AddEditEmployeeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CheckoutViewModel}">
+            <view:CheckoutView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SaleListViewModel}">
+            <view:SalesListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EmployeeListViewModel}">
+            <view:EmployeeListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EmployeeDetailViewModel}">
+            <view:EmployeeDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MyCarsViewModel}">
+            <view:MyCarsView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
