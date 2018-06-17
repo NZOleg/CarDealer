@@ -10,22 +10,23 @@ namespace CarDealer.DataAccess
     public partial class Employee
     {
         [ForeignKey("Person")]
-        public int EmployeeID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(300)]
-        public string Office_Address { get; set; }
+        public string OfficeAddress { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string Phone_Extension_Number { get; set; }
+        public string PhoneExtensionNumber { get; set; }
 
 
 
         [Required]
         [StringLength(20)]
         public string Role { get; set; }
-
+        
+        [Required]
         public virtual Person Person { get; set; }
     }
 }

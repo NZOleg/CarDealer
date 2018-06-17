@@ -50,29 +50,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarDealerDbContext.cs" />
-    <Compile Include="Migrations\201806110910073_initial.cs" />
-    <Compile Include="Migrations\201806110910073_initial.Designer.cs">
-      <DependentUpon>201806110910073_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201806160855364_Initial.cs" />
+    <Compile Include="Migrations\201806160855364_Initial.Designer.cs">
+      <DependentUpon>201806160855364_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806120101187_virtualFix.cs" />
-    <Compile Include="Migrations\201806120101187_virtualFix.Designer.cs">
-      <DependentUpon>201806120101187_virtualFix.cs</DependentUpon>
+    <Compile Include="Migrations\201806160922041_ManufactuureYearRequired.cs" />
+    <Compile Include="Migrations\201806160922041_ManufactuureYearRequired.Designer.cs">
+      <DependentUpon>201806160922041_ManufactuureYearRequired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806120523325_nullableAdded.cs" />
-    <Compile Include="Migrations\201806120523325_nullableAdded.Designer.cs">
-      <DependentUpon>201806120523325_nullableAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201806160928164_CarModelIsRequired.cs" />
+    <Compile Include="Migrations\201806160928164_CarModelIsRequired.Designer.cs">
+      <DependentUpon>201806160928164_CarModelIsRequired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806122116274_AskingPriceAdded.cs" />
-    <Compile Include="Migrations\201806122116274_AskingPriceAdded.Designer.cs">
-      <DependentUpon>201806122116274_AskingPriceAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806122128551_MoneyToInt.cs" />
-    <Compile Include="Migrations\201806122128551_MoneyToInt.Designer.cs">
-      <DependentUpon>201806122128551_MoneyToInt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806130346048_AgeToInt.cs" />
-    <Compile Include="Migrations\201806130346048_AgeToInt.Designer.cs">
-      <DependentUpon>201806130346048_AgeToInt.cs</DependentUpon>
+    <Compile Include="Migrations\201806161204371_ImageUriAdded.cs" />
+    <Compile Include="Migrations\201806161204371_ImageUriAdded.Designer.cs">
+      <DependentUpon>201806161204371_ImageUriAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,23 +83,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806110910073_initial.resx">
-      <DependentUpon>201806110910073_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806160855364_Initial.resx">
+      <DependentUpon>201806160855364_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806120101187_virtualFix.resx">
-      <DependentUpon>201806120101187_virtualFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806160922041_ManufactuureYearRequired.resx">
+      <DependentUpon>201806160922041_ManufactuureYearRequired.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806120523325_nullableAdded.resx">
-      <DependentUpon>201806120523325_nullableAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806160928164_CarModelIsRequired.resx">
+      <DependentUpon>201806160928164_CarModelIsRequired.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806122116274_AskingPriceAdded.resx">
-      <DependentUpon>201806122116274_AskingPriceAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806122128551_MoneyToInt.resx">
-      <DependentUpon>201806122128551_MoneyToInt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806130346048_AgeToInt.resx">
-      <DependentUpon>201806130346048_AgeToInt.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806161204371_ImageUriAdded.resx">
+      <DependentUpon>201806161204371_ImageUriAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

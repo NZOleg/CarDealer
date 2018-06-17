@@ -48,7 +48,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<ShowMyCarsEvent>().Publish(new ShowMyCarsEventArgs
             {
-                Id = Person.PersonID
+                Id = Person.Id
             });
         }
 
@@ -56,7 +56,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>().Publish(new OpenCustomerDetailViewEventArgs
             {
-                Id = Person.PersonID
+                Id = Person.Id
             });
         }
 

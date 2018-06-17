@@ -1,5 +1,6 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.Event;
 using CarDealer.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
@@ -9,12 +10,26 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace CarDealer.UI.ViewModel
 {
     class AddEditEmployeeViewModel : ViewModelBase, IAddEditEmployeeViewModel
     {
+
+        private Visibility _deleteVisibility;
+
+        public Visibility DeleteVisibility
+        {
+            get { return _deleteVisibility; }
+            set
+            {
+                _deleteVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         private IPersonRepository _personRepository;
         private EmployeeWrapper _employee;
 
@@ -54,6 +69,7 @@ namespace CarDealer.UI.ViewModel
             SaveCommand = new DelegateCommand<PasswordBox>(OnSaveCommandExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _personRepository = personRepository;
+            DeleteVisibility = Visibility.Visible;
         }
 
         private async void OnDeleteCommandExecute()
@@ -67,6 +83,8 @@ namespace CarDealer.UI.ViewModel
             Employee.Person.Password = password.Password;
             await _personRepository.SaveAsync();
 
+            _eventAggregator.GetEvent<OpenEmployeeListEvent>().Publish(new OpenEmployeeListEventArgs());
+
         }
 
         public async Task LoadAsync(int? id)
@@ -74,6 +92,7 @@ namespace CarDealer.UI.ViewModel
             Employee employee;
             if (id == null)
             {
+                DeleteVisibility = Visibility.Hidden;
                 employee = createNewEmployee();
             }
             else

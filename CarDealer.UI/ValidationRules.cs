@@ -14,6 +14,10 @@ namespace CarDealer.UI
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             int n;
+            if (value == null)
+            {
+                return new ValidationResult(false, "Field is required");
+            }
             if (!int.TryParse(value.ToString(), out n))
             {
                 return new ValidationResult(false, "Illegal characters used in this field");

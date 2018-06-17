@@ -14,18 +14,18 @@ namespace CarDealer.UI.ViewModel
         private IPersonRepository _personRepository;
 
 
-        public ObservableCollection<Cars_Sold> Cars { get; set; }
+        public ObservableCollection<CarSale> Cars { get; set; }
 
         public MyCarsViewModel(IPersonRepository personRepository)
         {
             _personRepository = personRepository;
-            Cars = new ObservableCollection<Cars_Sold>();
+            Cars = new ObservableCollection<CarSale>();
         }
 
         public async Task LoadAsync(int id)
         {
             var cars = await _personRepository.GetAllCustomerCars(id);
-            Cars = new ObservableCollection<Cars_Sold>(cars);
+            Cars = new ObservableCollection<CarSale>(cars);
 
         }
     }

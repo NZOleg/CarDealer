@@ -29,7 +29,8 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Car.CarModel.Manufacturer + " " + Car.CarModel.Model + " " +  Car.Manufacture_Year; }
+            //get { return Car.CarModel.Manufacturer + " " + Car.CarModel.Model + " " +  Car.ManufactureYear; }
+            get { return $"{Car.CarModel.Manufacturer,-10} {Car.CarModel.Model,-10} {Car.ManufactureYear,-4} {Car.BodyType,-6} {Car.Transmission,-10} {Car.CurrentMileage, -6}km {Car.CarModel.EngineSize, -4}cc ${Car.AskingPrice, -7}"; }
         }
 
 
@@ -45,7 +46,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenCarDetailViewEvent>().Publish(new OpenCarDetailViewEventArgs
             {
-                Id = Car.CarID
+                Id = Car.Id
             });
         }
     }

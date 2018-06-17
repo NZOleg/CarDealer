@@ -35,11 +35,11 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Office_Address:" Margin="10 5" />
-            <TextBox Grid.Row="0"  Grid.Column="1" Width="260" Text="{Binding Employee.Office_Address,
+            <Label Grid.Row="0" Grid.Column="0" Content="Office Address:" Margin="10 5" />
+            <TextBox Grid.Row="0"  Grid.Column="1" Width="260" Text="{Binding Employee.OfficeAddress,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Phone_Extension_Number:" Margin="10 5" />
-            <TextBox Grid.Row="1"  Grid.Column="1" Width="260" Text="{Binding Employee.Phone_Extension_Number,
+            <TextBox Grid.Row="1"  Grid.Column="1" Width="260" Text="{Binding Employee.PhoneExtensionNumber,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Role:" Margin="10 5" />
             <TextBox Grid.Row="2"  Grid.Column="1" Width="260" Text="{Binding Employee.Role,
@@ -63,7 +63,7 @@
                 <Button Content="Save" Width="125" Margin="10"
               Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=password}"/>
                 <Button Content="Delete" Width="125"  Margin="10"
-              Command="{Binding DeleteCommand}"/>
+              Command="{Binding DeleteCommand}" Visibility="{Binding DeleteVisibility}"/>
             </StackPanel>
         </Grid>
 

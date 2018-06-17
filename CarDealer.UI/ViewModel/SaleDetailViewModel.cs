@@ -9,9 +9,9 @@ namespace CarDealer.UI.ViewModel
 {
     class SaleDetailViewModel : ViewModelBase, ISaleDetailViewModel
     {
-        private Cars_Sold _sale;
+        private CarSale _sale;
 
-        public Cars_Sold Sale
+        public CarSale Sale
         {
             get { return _sale; }
             set {
@@ -24,7 +24,7 @@ namespace CarDealer.UI.ViewModel
         {
         }
 
-        public void Load(Cars_Sold sale)
+        public void Load(CarSale sale)
         {
             Sale = sale;
         }

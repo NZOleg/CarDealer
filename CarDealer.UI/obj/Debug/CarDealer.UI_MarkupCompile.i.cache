@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.UI\App.xaml
-16665851493
+17553254233
 
-93-1128336264
-28-1363565929
-MainWindow.xaml;View\AddEditCarView.xaml;View\AddEditCustomerView.xaml;View\AddEditEmployeeView.xaml;View\CarDetailView.xaml;View\CarListView.xaml;View\CheckoutView.xaml;View\CustomerDetailView.xaml;View\CustomerListView.xaml;View\EmployeeDetailView.xaml;View\EmployeeListView.xaml;View\LoginView.xaml;View\MenuView.xaml;View\MyCarsView.xaml;View\SaleDetailView.xaml;View\SalesListView.xaml;
+100-1328501444
+292117513327
+MainWindow.xaml;View\AddEditCarView.xaml;View\AddEditCustomerView.xaml;View\AddEditEmployeeView.xaml;View\CarDetailView.xaml;View\CarFiltersView.xaml;View\CarListView.xaml;View\CheckoutView.xaml;View\CustomerDetailView.xaml;View\CustomerListView.xaml;View\EmployeeDetailView.xaml;View\EmployeeListView.xaml;View\LoginView.xaml;View\MenuView.xaml;View\MyCarsView.xaml;View\SaleDetailView.xaml;View\SalesListView.xaml;
 
 False
 

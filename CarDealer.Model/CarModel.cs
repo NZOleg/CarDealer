@@ -16,7 +16,7 @@ namespace CarDealer.DataAccess
         }
 
         [Key]
-        public int ModelID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -26,9 +26,11 @@ namespace CarDealer.DataAccess
         [StringLength(50)]
         public string Manufacturer { get; set; }
 
-        public int? NumberOfSeats { get; set; }
+        [Required]
+        public int NumberOfSeats { get; set; }
 
-        public double? EngineSize { get; set; }
+        [Required]
+        public int EngineSize { get; set; }
         
         public virtual ICollection<IndividualCar> IndividualCars { get; set; }
     }

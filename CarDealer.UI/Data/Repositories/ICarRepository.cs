@@ -1,4 +1,5 @@
 ﻿using CarDealer.DataAccess;
+using CarDealer.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,8 @@ namespace CarDealer.UI.Data.Repositories
         Task<CarModel> SaveCarModelAsync(CarModel carModel);
         Task<CarModel> CreateOrAssignCarModelAsync(CarModel carModel);
         Task<Collection<CarFeature>> GetAllCarFeatures();
-        Task<Collection<Cars_Sold>> GetAllSalesAsync();
+        Task<Collection<CarSale>> GetAllSalesAsync();
+        Task<Collection<IndividualCar>> ApplyFilterAsync(CarFiltersViewModel carFiltersViewModel);
+        Task CarIsSoldAsync(int id);
     }
 }

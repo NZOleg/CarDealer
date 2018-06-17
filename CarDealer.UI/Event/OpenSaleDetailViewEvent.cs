@@ -14,6 +14,6 @@ namespace CarDealer.UI.Event
 
     public class OpenSaleDetailViewEventArgs
     {
-        public Cars_Sold Sale { get; set; }
+        public CarSale Sale { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace CarDealer.UI.Wrapper
         public CustomerWrapper(Customer model) : base(model)
         {
         }
-        public string Licence_Number
+        public string LicenceNumber
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }
@@ -22,15 +22,15 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<int>(); }
             set { SetValue(value); }
         }
-        public DateTime License_Expiry_Date
+        public DateTime LicenseExpiryDate
         {
             get { return GetValue<DateTime>(); }
             set { SetValue(value); }
         }
 
-        public ICollection<Cars_Sold> Cars_Sold
+        public ICollection<CarSale> CarsSold
         {
-            get { return GetValue<ICollection<Cars_Sold>>(); }
+            get { return GetValue<ICollection<CarSale>>(); }
             set { SetValue(value); }
         }
         public Person Person

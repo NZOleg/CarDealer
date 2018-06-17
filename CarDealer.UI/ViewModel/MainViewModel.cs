@@ -146,7 +146,7 @@ namespace CarDealer.UI.ViewModel
         private async void OpenMyCarsAsync(ShowMyCarsEventArgs obj)
         {
             CurrentView = _myCarsViewModelCreator();
-            await CurrentView.LoadAsync(CurrentUser.PersonID);
+            await CurrentView.LoadAsync(CurrentUser.Id);
         }
 
         private async void OpenMainPageAsync(OpenMainPageEventArgs obj)
@@ -192,12 +192,13 @@ namespace CarDealer.UI.ViewModel
         private async void OpenCheckoutPageAsync(OpenCheckoutEventArgs obj)
         {
             CurrentView = _checkoutViewModelCreator();
-            await CurrentView.LoadAsync(obj.Id, CurrentUser.PersonID);
+            await CurrentView.LoadAsync(obj.Id, CurrentUser.Id);
         }
 
         private void OpenLoginPage(AfterLogoutEventArgs obj)
         {
             CurrentView = null;
+            CurrentUser = null;
             MenuViewModel = null;
             LoginViewModel = _loginViewModelCreator();
 
@@ -205,9 +206,9 @@ namespace CarDealer.UI.ViewModel
 
         private async void AddEditCustomerAsync(AddEditCustomerEventArgs obj)
         {
-            if(CurrentUser == null)
+            LoginViewModel = null;
+            if (CurrentUser == null)
             {
-                LoginViewModel = null;
                 MenuViewModel = null;
             }
 
@@ -223,8 +224,19 @@ namespace CarDealer.UI.ViewModel
 
         private async void OpenCustomerListAsync(OpenCustomerListEventArgs obj)
         {
-            CurrentView = _customerListViewModelCreator();
-            await CurrentView.LoadAsync();
+            //if the event comes from a new customer, go to the login view
+            if(CurrentUser == null)
+            {
+                LoginViewModel = _loginViewModelCreator();
+                CurrentView = null;
+                MenuViewModel = null;
+            }
+            else
+            {
+                CurrentView = _customerListViewModelCreator();
+                await CurrentView.LoadAsync();
+            }
+
         }
 
         private async void OpenEmployeeListAsync(OpenEmployeeListEventArgs obj)

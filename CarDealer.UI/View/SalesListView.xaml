@@ -37,6 +37,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Label FontWeight="Bold" FontSize="32" Visibility="{Binding NoCarAlertVisibility}"  Content="No Sales has been made yet!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <GroupBox  Header="Sales of Cars">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
@@ -44,7 +45,7 @@
                               ItemTemplate="{StaticResource NaviItemTemplate}"/>
 
             </ScrollViewer>
-
+            
         </GroupBox>
     </Grid>
 </UserControl>

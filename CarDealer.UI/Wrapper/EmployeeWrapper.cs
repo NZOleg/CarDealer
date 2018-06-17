@@ -13,12 +13,12 @@ namespace CarDealer.UI.Wrapper
         {
 
         }
-        public string Office_Address
+        public string OfficeAddress
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
-        public string Phone_Extension_Number
+        public string PhoneExtensionNumber
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }

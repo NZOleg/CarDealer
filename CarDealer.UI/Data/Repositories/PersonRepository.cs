@@ -22,7 +22,7 @@ namespace CarDealer.UI.Data.Repositories
         }
 
         public async Task<bool> IsPersonCustomer(int id) {
-            var customer = await Context.Customers.Where(c => c.CustomerID == id ).SingleOrDefaultAsync();
+            var customer = await Context.Customers.Where(c => c.Id == id ).SingleOrDefaultAsync();
             if (customer == null)
                 return false;
             return true;
@@ -31,7 +31,7 @@ namespace CarDealer.UI.Data.Repositories
 
         public async Task<string> GetEmployeeRole(int id)
         {
-            var employee = await Context.Employees.Where(c => c.EmployeeID == id).SingleOrDefaultAsync();
+            var employee = await Context.Employees.Where(c => c.Id == id).SingleOrDefaultAsync();
             if (employee == null)
                 return "";
             return employee.Role;
@@ -50,7 +50,7 @@ namespace CarDealer.UI.Data.Repositories
 
         public async Task<Customer> GetCustomerByIdAsync(int id)
         {
-            Customer person =  await Context.Customers.Where(p => p.CustomerID == id).SingleOrDefaultAsync();
+            Customer person =  await Context.Customers.Where(p => p.Id == id).SingleOrDefaultAsync();
             return person;
         }
 
@@ -60,12 +60,12 @@ namespace CarDealer.UI.Data.Repositories
             
         }
 
-        public async Task AddNewSaleAsync(int carID, int customerID, Cars_Sold cars_Sold)
+        public async Task AddNewSaleAsync(int carID, int customerID, CarSale cars_Sold)
         {
-            IndividualCar car = await Context.IndividualCars.Where(ic => ic.CarID == carID).SingleAsync();
-            Customer customer = await Context.Customers.Where(c => c.CustomerID == customerID).SingleAsync();
+            IndividualCar car = await Context.IndividualCars.Where(ic => ic.Id == carID).SingleAsync();
+            Customer customer = await Context.Customers.Where(c => c.Id == customerID).SingleAsync();
             cars_Sold.IndividualCar = car;
-            customer.Cars_Sold.Add(cars_Sold);
+            customer.CarSale.Add(cars_Sold);
              await SaveAsync();
         }
         public void AddCustomer(Customer customer)
@@ -96,14 +96,14 @@ namespace CarDealer.UI.Data.Repositories
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            Employee person = await Context.Employees.Where(p => p.EmployeeID == id).SingleOrDefaultAsync();
+            Employee person = await Context.Employees.Where(p => p.Id == id).SingleOrDefaultAsync();
             return person;
         }
 
-        public async Task<Collection<Cars_Sold>> GetAllCustomerCars(int id)
+        public async Task<Collection<CarSale>> GetAllCustomerCars(int id)
         {
-            var cars = await Context.Cars_Sold.Where(cs => cs.Customer.CustomerID == id).ToListAsync();
-            return new Collection<Cars_Sold>(cars);
+            var cars = await Context.Cars_Sold.Where(cs => cs.Customer.Id == id).ToListAsync();
+            return new Collection<CarSale>(cars);
         }
     }
 }

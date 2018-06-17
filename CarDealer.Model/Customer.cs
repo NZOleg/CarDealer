@@ -13,23 +13,25 @@ namespace CarDealer.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            Cars_Sold = new Collection<Cars_Sold>();
+            CarSale = new Collection<CarSale>();
         }
 
         [ForeignKey("Person")]
-        public int CustomerID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string Licence_Number { get; set; }
+        public string LicenceNumber { get; set; }
 
         public int Age { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
-        public DateTime License_Expiry_Date { get; set; }
+        public DateTime LicenseExpiryDate { get; set; }
         
-        public virtual ICollection<Cars_Sold> Cars_Sold { get; set; }
+        public virtual ICollection<CarSale> CarSale { get; set; }
 
+        [Required]
         public virtual Person Person { get; set; }
     }
 }

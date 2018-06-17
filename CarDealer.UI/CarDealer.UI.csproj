@@ -49,6 +49,7 @@
     <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -102,6 +103,7 @@
     <Compile Include="Event\AddEditEmployeeEvent.cs" />
     <Compile Include="Event\AfterLoginSuccessedEvent.cs" />
     <Compile Include="Event\AfterLogoutEvent.cs" />
+    <Compile Include="Event\FilterHasChangedEvent.cs" />
     <Compile Include="Event\OpenCarDetailViewEvent.cs" />
     <Compile Include="Event\OpenCarListEvent.cs" />
     <Compile Include="Event\OpenCheckoutEvent.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="Event\OpenSaleDetailViewEvent.cs" />
     <Compile Include="Event\OpenSaleListEvent.cs" />
     <Compile Include="Event\ShowMyCarsEvent.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\IntToTextConverter.cs" />
     <Compile Include="Helpers\MenuItemContainerTemplateSelector.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ValidationRules.cs" />
@@ -121,6 +125,7 @@
     <Compile Include="ViewModel\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\CarDetailViewModel.cs" />
     <Compile Include="ViewModel\CarFeatureModelView.cs" />
+    <Compile Include="ViewModel\CarFiltersViewModel.cs" />
     <Compile Include="ViewModel\CarListItemViewModel.cs" />
     <Compile Include="ViewModel\CarListViewModel.cs" />
     <Compile Include="ViewModel\CheckoutViewModel.cs" />
@@ -167,6 +172,9 @@
     <Compile Include="View\CarDetailView.xaml.cs">
       <DependentUpon>CarDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CarFiltersView.xaml.cs">
+      <DependentUpon>CarFiltersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CarListView.xaml.cs">
       <DependentUpon>CarListView.xaml</DependentUpon>
     </Compile>
@@ -200,6 +208,8 @@
     <Compile Include="View\SalesListView.xaml.cs">
       <DependentUpon>SalesListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Services\IMessageDialogService.cs" />
+    <Compile Include="View\Services\MessageDialogService.cs" />
     <Compile Include="Wrapper\CarWrapper.cs" />
     <Compile Include="Wrapper\CustomerWrapper.cs" />
     <Compile Include="Wrapper\EmployeeWrapper.cs" />
@@ -230,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CarDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CarFiltersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -317,9 +331,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Lookups\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\1.jpg" />
+    <Folder Include="images\" />
+    <Folder Include="Microsoft\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

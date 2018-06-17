@@ -16,13 +16,15 @@ namespace CarDealer.DataAccess
         }
 
         [Key]
-        public int FeatureID { get; set; }
+        public int Id { get; set; }
 
+        [Required]
         [StringLength(50)]
-        public string Car_Feature { get; set; }
+        public string Feature { get; set; }
 
+        [Required]
         [StringLength(256)]
-        public string Car_Feature_Description { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<IndividualCar> IndividualCars { get; set; }
     }

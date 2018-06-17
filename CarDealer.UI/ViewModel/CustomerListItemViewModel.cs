@@ -30,7 +30,7 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Customer.Person.Username; }
+            get { return $"{Customer.Person.Username, -10} {Customer.Person.Name,-10} {Customer.Age} {Customer.Person.Telephone,-10} {Customer.LicenceNumber}"; }
         }
 
 
@@ -46,7 +46,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenCustomerDetailViewEvent>().Publish(new OpenCustomerDetailViewEventArgs
             {
-                Id = Customer.CustomerID
+                Id = Customer.Id
             });
         }
     }

@@ -38,19 +38,19 @@
 
         <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditEmployeeViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Label Content="{Binding Person.Office_Address}"/>
+            <Label Content="{Binding Employee.Person.Name}"/>
 
-            <Label Content="{Binding Person.Address}"/>
+            <Label Content="{Binding Employee.Person.Address}"/>
 
-            <Label Content="{Binding Person.Telephone}"/>
+            <Label Content="{Binding Employee.Person.Telephone}"/>
 
-            <Label Content="{Binding Person.Username}"/>
+            <Label Content="{Binding Employee.Person.Username}"/>
 
-            <Label Content="{Binding Person.Customer.Licence_Number}"/>
+            <Label Content="{Binding Employee.OfficeAddress}"/>
 
-            <Label Content="{Binding Person.Customer.Age}"/>
+            <Label Content="{Binding Employee.PhoneExtensionNumber}"/>
 
-            <Label Content="{Binding Person.Customer.License_Expiry_Date}"/>
+            <Label Content="{Binding Employee.Role}"/>
 
         </StackPanel>
 

@@ -38,19 +38,19 @@
 
         <Button Grid.Column="2" Grid.Row="1"  Content="Edit" Command="{Binding EditCustomerViewCommand}"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Label Content="{Binding Person.Name}"/>
+            <Label Content="{Binding Customer.LicenceNumber}"/>
 
-            <Label Content="{Binding Person.Address}"/>
+            <Label Content="{Binding Customer.Age}"/>
 
-            <Label Content="{Binding Person.Telephone}"/>
+            <Label Content="{Binding Customer.LicenseExpiryDate}"/>
 
-            <Label Content="{Binding Person.Username}"/>
+            <Label Content="{Binding Customer.Person.Name}"/>
 
-            <Label Content="{Binding Person.Customer.Licence_Number}"/>
+            <Label Content="{Binding Customer.Person.Address}"/>
 
-            <Label Content="{Binding Person.Customer.Age}"/>
+            <Label Content="{Binding Customer.Person.Telephone}"/>
 
-            <Label Content="{Binding Person.Customer.License_Expiry_Date}"/>
+            <Label Content="{Binding Customer.Person.Username}"/>
 
         </StackPanel>
 

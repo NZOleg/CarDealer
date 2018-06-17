@@ -17,8 +17,8 @@ namespace CarDealer.UI.Data.Repositories
         Task<Customer> GetCustomerByIdAsync(int id);
         Task<Collection<Customer>> GetAllCustomersAsync();
         void AddCustomer(Customer customer);
-        Task AddNewSaleAsync(int carID, int customerID, Cars_Sold cars_Sold);
-        Task<Collection<Cars_Sold>> GetAllCustomerCars(int id);
+        Task AddNewSaleAsync(int carID, int customerID, CarSale cars_Sold);
+        Task<Collection<CarSale>> GetAllCustomerCars(int id);
         void RemoveCustomer(Customer model);
         Task<Collection<Employee>> GetAllEmployeesAsync();
         void RemoveEmployee(Employee model);

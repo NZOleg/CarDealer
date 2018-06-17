@@ -1,5 +1,8 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.Event;
+using CarDealer.UI.Helpers;
+using CarDealer.UI.View.Services;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -12,6 +15,8 @@ namespace CarDealer.UI.ViewModel
 {
     class CheckoutViewModel : ViewModelBase, ICheckoutViewModel
     {
+        public IMessageDialogService MessageDialogService { get; }
+
         private IEventAggregator _eventAggregator;
         private ICarRepository _carRepository;
         private IPersonRepository _personRepository;
@@ -23,10 +28,7 @@ namespace CarDealer.UI.ViewModel
         public IndividualCar Car
         {
             get { return _car; }
-            set {
-                _car = value;
-                OnPropertyChanged();
-            }
+            set {_car = value;}
         }
 
         private int _price;
@@ -45,7 +47,10 @@ namespace CarDealer.UI.ViewModel
         public DateTime Date
         {
             get { return _date; }
-            set { _date = value; }
+            set {
+                _date = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -60,26 +65,34 @@ namespace CarDealer.UI.ViewModel
 
 
 
-        public CheckoutViewModel(ICarRepository carRepository, IPersonRepository personRepository, IEventAggregator eventAggregator)
+        public CheckoutViewModel(IMessageDialogService messageDialogService, ICarRepository carRepository, IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
+            MessageDialogService = messageDialogService;
             _eventAggregator = eventAggregator;
             _carRepository = carRepository;
             _personRepository = personRepository;
             BuyCarCommand = new DelegateCommand(OnBuyCarExecute);
+            Date = DateTime.Now;
         }
 
         private async void OnBuyCarExecute()
         {
-            //Add showbox TODO
-
+            var result = await MessageDialogService.ShowOkCancelDialogAsync($"Do you really want to buy {Car.CarModel.Manufacturer} {Car.CarModel.Model} {Car.ManufactureYear}?",
+              "Question");
+            if (result == MessageDialogResult.Cancel)
+            {
+                _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
+                return;
+            }
             //injecting data from another repository is not allowed when save changes is reqired
             //additional function is created in person repository
-            Cars_Sold cars_Sold = new Cars_Sold
+            CarSale cars_Sold = new CarSale
             {
-                Sale_Price = Price,
-                Date_Sold = Date
+                SalePrice = Price,
+                Date = Date
             };
-            await _personRepository.AddNewSaleAsync(Car.CarID, Customer.CustomerID, cars_Sold);
+            await _personRepository.AddNewSaleAsync(Car.Id, Customer.Id, cars_Sold);
+            await _carRepository.CarIsSoldAsync(Car.Id);
         }
 
         public async Task LoadAsync(int carId, int customerId)

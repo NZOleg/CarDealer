@@ -10,7 +10,7 @@ namespace CarDealer.DataAccess
     public partial class Person
     {
         [Key]
-        public int PersonID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]

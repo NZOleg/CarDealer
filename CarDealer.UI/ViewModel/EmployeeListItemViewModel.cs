@@ -30,7 +30,7 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Employee.Person.Username; }
+            get { return $"{Employee.Person.Username,-10} {Employee.Person.Name,-10} {Employee.PhoneExtensionNumber, -5} {Employee.Person.Telephone,-11} {Employee.OfficeAddress, -20} {Employee.Role, -12}"; }
         }
 
 
@@ -46,7 +46,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenEmployeeDetailViewEvent>().Publish(new OpenEmployeeDetailViewEventArgs
             {
-                Id = Employee.EmployeeID
+                Id = Employee.Id
             });
         }
     }

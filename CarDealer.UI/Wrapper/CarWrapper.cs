@@ -18,7 +18,7 @@ namespace CarDealer.UI.Wrapper
 
 
 
-        public int CarID
+        public int Id
         {
             get { return GetValue<int>(); }
         }
@@ -27,22 +27,39 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
-        public int? Current_Mileage
+
+        public string ImageUri
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
+
+        public int? CurrentMileage
         {
             get { return GetValue<int?>(); }
             set { SetValue(value); }
         }
-        public DateTime Date_Imported
+        public DateTime DateImported
         {
             get { return GetValue<DateTime>(); }
             set { SetValue(value); }
         }
 
-        public int? Manufacture_Year
+        public int? ManufactureYear
         {
             get { return GetValue<int?>(); }
             set { SetValue(value); }
         }
+
+        public int? AskingPrice
+        {
+            get { return GetValue<int?>(); }
+            set { SetValue(value); }
+        }
+
+        
+
+        
         public string Transmission
         {
             get { return GetValue<string>(); }
@@ -53,11 +70,13 @@ namespace CarDealer.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
-        public string Body_Type
+        public string BodyType
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
+        
+
         public CarModel CarModel
         {
             get { return GetValue<CarModel>(); }
@@ -66,9 +85,9 @@ namespace CarDealer.UI.Wrapper
             }
         }
 
-        public Cars_Sold Cars_Sold
+        public CarSale CarSale
         {
-            get { return GetValue<Cars_Sold>(); }
+            get { return GetValue<CarSale>(); }
             set { SetValue(value); }
         }
 
@@ -81,8 +100,8 @@ namespace CarDealer.UI.Wrapper
         {
             switch (propertyName)
             {
-                case nameof(Colour):
-                    if (string.Equals(Colour, "Oleg", StringComparison.OrdinalIgnoreCase))
+                case nameof(CarModel):
+                    if (string.Equals(CarModel.Model, "Oleg", StringComparison.OrdinalIgnoreCase))
                     {
                         yield return "Robots are not valid friends";
                     }

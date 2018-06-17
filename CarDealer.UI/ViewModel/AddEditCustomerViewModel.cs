@@ -10,12 +10,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace CarDealer.UI.ViewModel
 {
     class AddEditCustomerViewModel : ViewModelBase, IAddEditCustomerViewModel
     {
+
+        private Visibility _deleteVisibility;
+
+        public Visibility DeleteVisibility
+        {
+            get { return _deleteVisibility; }
+            set
+            {
+                _deleteVisibility = value;
+                OnPropertyChanged();
+            }
+        }
         private IPersonRepository _personRepository;
         private CustomerWrapper _customer;
 
@@ -55,6 +68,7 @@ namespace CarDealer.UI.ViewModel
             SaveCommand = new DelegateCommand<PasswordBox>(OnSaveCommandExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _personRepository = personRepository;
+            DeleteVisibility = Visibility.Visible;
         }
 
         private async void OnDeleteCommandExecute()
@@ -68,7 +82,7 @@ namespace CarDealer.UI.ViewModel
             Customer.Person.Password = password.Password;
             await _personRepository.SaveAsync();
             
-            _eventAggregator.GetEvent<OpenMainPageEvent>().Publish(new OpenMainPageEventArgs());
+            _eventAggregator.GetEvent<OpenCustomerListEvent>().Publish(new OpenCustomerListEventArgs());
 
         }
 
@@ -77,6 +91,7 @@ namespace CarDealer.UI.ViewModel
             Customer customer;
             if(id == null)
             {
+                DeleteVisibility = Visibility.Hidden;
                 customer = createNewCustomer();
             }
             else
@@ -108,7 +123,8 @@ namespace CarDealer.UI.ViewModel
             Customer customer = new Customer
             {
                 Person = new Person(),
-                Cars_Sold = new Collection<Cars_Sold>()
+                CarSale = new Collection<CarSale>(),
+                LicenseExpiryDate = DateTime.Now
             };
             _personRepository.AddCustomer(customer);
             return customer;

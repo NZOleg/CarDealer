@@ -71,7 +71,7 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<OpenCheckoutEvent>().Publish(new OpenCheckoutEventArgs
             {
-                Id = Car.CarID
+                Id = Car.Id
             });
         }
 
@@ -79,16 +79,16 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<AddEditCarEvent>().Publish(new AddEditCarEventArgs
             {
-                Id = Car.CarID
+                Id = Car.Id
             });
         }
 
         public async Task LoadAsync(int id, Person person)
         {
-            string role = await _personRepository.GetPersonRole(person.PersonID);
+            string role = await _personRepository.GetPersonRole(person.Id);
             if (role == "customer")
             {
-                Customer = await _personRepository.GetCustomerByIdAsync(person.PersonID);
+                Customer = await _personRepository.GetCustomerByIdAsync(person.Id);
             }
             Car = await _carRepository.GetByIdAsync(id);
             SetLayoutForCurrentUser(role);

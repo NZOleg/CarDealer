@@ -1,4 +1,6 @@
 ﻿using CarDealer.DataAccess;
+using CarDealer.UI.Helpers;
+using CarDealer.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,9 +42,9 @@ namespace CarDealer.UI.Data.Repositories
             return new Collection<CarFeature>(await Context.CarFeatures.ToListAsync());
         }
 
-        public async Task<Collection<Cars_Sold>> GetAllSalesAsync()
+        public async Task<Collection<CarSale>> GetAllSalesAsync()
         {
-            return new Collection<Cars_Sold>(await Context.Cars_Sold.ToListAsync());
+            return new Collection<CarSale>(await Context.Cars_Sold.ToListAsync());
         }
 
         //public async Task<ICollection<CarFeature>> GetCarFeatures(int id)
@@ -62,5 +64,69 @@ namespace CarDealer.UI.Data.Repositories
         //    return car.CarModel;
         //}
 
+        public async Task<Collection<IndividualCar>> ApplyFilterAsync(CarFiltersViewModel carFiltersViewModel)
+        {
+            var query = Context.IndividualCars.Where(ic => ic.Status == Constants.CAR_AVAILABLE);
+            if (carFiltersViewModel.Manufacturer != "" && carFiltersViewModel.Manufacturer != null)
+            {
+                query = query.Where(ic => ic.CarModel.Manufacturer == carFiltersViewModel.Manufacturer);
+            }
+            if (carFiltersViewModel.Model != "" && carFiltersViewModel.Model != null)
+            {
+                query = query.Where(ic => ic.CarModel.Model == carFiltersViewModel.Model);
+            }
+            if (carFiltersViewModel.BodyType != "" && carFiltersViewModel.BodyType != null)
+            {
+                query = query.Where(ic => ic.BodyType == carFiltersViewModel.BodyType);
+            }
+            if (carFiltersViewModel.EngineSizeMin != null && carFiltersViewModel.EngineSizeMin != 0)
+            {
+                query = query.Where(ic => ic.CarModel.EngineSize >= carFiltersViewModel.EngineSizeMin);
+            }
+            if (carFiltersViewModel.EngineSizeMax != null && carFiltersViewModel.EngineSizeMax != 0)
+            {
+                query = query.Where(ic => ic.CarModel.EngineSize <= carFiltersViewModel.EngineSizeMax);
+            }
+            if (carFiltersViewModel.ManufactureYearMin != null && carFiltersViewModel.ManufactureYearMin != 0)
+            {
+                query = query.Where(ic => ic.ManufactureYear >= carFiltersViewModel.ManufactureYearMin);
+            }
+            if (carFiltersViewModel.ManufactureYearMax != null && carFiltersViewModel.ManufactureYearMax != 0)
+            {
+                query = query.Where(ic => ic.ManufactureYear <= carFiltersViewModel.ManufactureYearMax);
+            }
+            if (carFiltersViewModel.Transmission != "" && carFiltersViewModel.Transmission != null)
+            {
+                query = query.Where(ic => ic.Transmission == carFiltersViewModel.Transmission);
+            }
+            if (carFiltersViewModel.MileageMin != null && carFiltersViewModel.MileageMin != 0)
+            {
+                query = query.Where(ic => ic.CurrentMileage >= carFiltersViewModel.MileageMin);
+            }
+            if (carFiltersViewModel.MileageMax != null && carFiltersViewModel.MileageMax != 0)
+            {
+                query = query.Where(ic => ic.CurrentMileage <= carFiltersViewModel.MileageMax);
+            }
+            if (carFiltersViewModel.Colour != "" && carFiltersViewModel.Colour != null)
+            {
+                query = query.Where(ic => ic.Colour == carFiltersViewModel.Colour);
+            }
+            if (carFiltersViewModel.AskingPriceMin != null && carFiltersViewModel.AskingPriceMin != 0)
+            {
+                query = query.Where(ic => ic.AskingPrice >= carFiltersViewModel.AskingPriceMin);
+            }
+            if (carFiltersViewModel.AskingPriceMax != null && carFiltersViewModel.AskingPriceMax != 0)
+            {
+                query = query.Where(ic => ic.AskingPrice <= carFiltersViewModel.AskingPriceMax);
+            }
+            return new Collection<IndividualCar>( await query.ToListAsync());
+        }
+
+        public async Task CarIsSoldAsync(int id)
+        {
+            IndividualCar car = await Context.IndividualCars.Where(ic => ic.Id == id).SingleOrDefaultAsync();
+            car.Status = Constants.CAR_UNAVAILABLE;
+            await Context.SaveChangesAsync();
+        }
     }
 }

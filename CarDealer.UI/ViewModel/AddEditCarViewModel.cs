@@ -1,5 +1,7 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.Event;
+using CarDealer.UI.Helpers;
 using CarDealer.UI.Wrapper;
 using Microsoft.Win32;
 using Prism.Commands;
@@ -18,6 +20,16 @@ namespace CarDealer.UI.ViewModel
     class AddEditCarViewModel : ViewModelBase, IAddEditCarViewModel
     {
 
+        private Visibility _deleteVisibility;
+
+        public Visibility DeleteVisibility
+        {
+            get { return _deleteVisibility; }
+            set {
+                _deleteVisibility = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ICarRepository _carRepository;
         private CarWrapper _car;
@@ -58,34 +70,24 @@ namespace CarDealer.UI.ViewModel
 
         public DelegateCommand SaveCommand { get;  }
         public DelegateCommand DeleteCommand { get; }
-        public DelegateCommand SaveImage { get; }
 
         public AddEditCarViewModel(ICarRepository carRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             SaveCommand = new DelegateCommand(OnSaveCommandExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
-            SaveImage = new DelegateCommand(OnSaveImageExecute);
             _carRepository = carRepository;
             CarFeatures = new ObservableCollection<CarFeatureModelView>();
+            DeleteVisibility = Visibility.Visible;
         }
 
-        private void OnSaveImageExecute()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
-            openFileDialog.Title = "Select a Car Image";
-            openFileDialog.ShowDialog(); 
-            if (openFileDialog.CheckFileExists && openFileDialog.CheckPathExists)
-            {
-                File.Copy(openFileDialog.FileName, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\images\\" + openFileDialog.SafeFileName);
-            }
-        }
 
         private async void OnDeleteCommandExecute()
         {
             _carRepository.Remove(Car.Model);
             await _carRepository.SaveAsync();
+
+            _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
         }
 
         private async void OnSaveCommandExecute()
@@ -102,7 +104,7 @@ namespace CarDealer.UI.ViewModel
             Collection<CarFeature> carFeatures = await _carRepository.GetAllCarFeatures();
             foreach (CarFeature carFeature in carFeatures)
             {
-                if (carFeature.IndividualCars.Any(ic => ic.CarID == Car.CarID))
+                if (carFeature.IndividualCars.Any(ic => ic.Id == Car.Id))
                 {
                     carFeature.IndividualCars.Remove(Car.Model);
                     Car.Model.CarFeatures.Remove(carFeature);
@@ -128,6 +130,7 @@ namespace CarDealer.UI.ViewModel
             IndividualCar car;
             if (id == null)
             {
+                DeleteVisibility = Visibility.Hidden;
                 car = CreateNewCar();
             }
             else
@@ -135,7 +138,7 @@ namespace CarDealer.UI.ViewModel
                 car = await _carRepository.GetByIdAsync((int)id);
             }
             InitializeCar(car);
-
+            
             await LoadCarFeaturesAsync();
         }
 
@@ -146,13 +149,13 @@ namespace CarDealer.UI.ViewModel
             Collection<int> currentFeaturesId = new Collection<int>();
             foreach (CarFeature carfeature in currentFeatures)
             {
-                currentFeaturesId.Add(carfeature.FeatureID);
+                currentFeaturesId.Add(carfeature.Id);
             }
 
 
             foreach (CarFeature carFeature in carFeatures)
             {
-                if (currentFeaturesId.Contains(carFeature.FeatureID)){
+                if (currentFeaturesId.Contains(carFeature.Id)){
 
                     CarFeatures.Add(new CarFeatureModelView(carFeature) { IsChecked = true });
                 }
@@ -184,9 +187,10 @@ namespace CarDealer.UI.ViewModel
         {
             var car = new IndividualCar {
                 CarModel = new CarModel(),
-                Cars_Sold = null,
+                CarSale = null,
                 CarFeatures = new Collection<CarFeature>(),
-                Date_Imported = DateTime.Now
+                DateImported = DateTime.Now,
+                Status = Constants.CAR_AVAILABLE
             };
             _carRepository.Add(car);
             return car;

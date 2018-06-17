@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="CarFeature.cs" />
     <Compile Include="CarModel.cs" />
-    <Compile Include="Cars_Sold.cs" />
+    <Compile Include="CarSale.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="IndividualCar.cs" />

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarDealer.UI.ViewModel
 {
@@ -14,6 +15,18 @@ namespace CarDealer.UI.ViewModel
     {
         private IEventAggregator _eventAggregator;
         private ICarRepository _carRepository;
+
+        private Visibility _noCarAlertVisibility;
+
+        public Visibility NoCarAlertVisibility
+        {
+            get { return _noCarAlertVisibility; }
+            set {
+                _noCarAlertVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<SaleListItemViewModel> Sales { get; set; }
 
@@ -24,13 +37,18 @@ namespace CarDealer.UI.ViewModel
             _eventAggregator = eventAggregator;
             _carRepository = carRepository;
             Sales = new ObservableCollection<SaleListItemViewModel>();
+            NoCarAlertVisibility = Visibility.Hidden;
         }
         public async Task LoadAsync()
         {
-            Collection<Cars_Sold> sales= await _carRepository.GetAllSalesAsync();
-            foreach(Cars_Sold sale in sales)
+            Collection<CarSale> sales= await _carRepository.GetAllSalesAsync();
+            foreach(CarSale sale in sales)
             {
                 Sales.Add(new SaleListItemViewModel(sale, _eventAggregator));
+            }
+            if (sales.Count == 0)
+            {
+                NoCarAlertVisibility = Visibility.Visible;
             }
         }
     }

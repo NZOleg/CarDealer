@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using CarDealer.UI.View.Services;
 using CarDealer.UI.ViewModel;
 using Prism.Events;
 
@@ -16,6 +17,7 @@ namespace CarDealer.UI.Startup
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
+            builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
             builder.RegisterType<PersonRepository>().As<IPersonRepository>();
             builder.RegisterType<CarRepository>().As<ICarRepository>();
             builder.RegisterType<LoginViewModel>().As<ILoginViewModel>();

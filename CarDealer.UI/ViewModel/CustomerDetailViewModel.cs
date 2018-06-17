@@ -13,14 +13,14 @@ namespace CarDealer.UI.ViewModel
 {
     class CustomerDetailViewModel : ViewModelBase, ICustomerDetailViewModel
     {
-        private Customer _person;
+        private Customer _customer;
 
-        public Customer Person
+        public Customer Customer
         {
-            get { return _person; }
+            get { return _customer; }
             set
             {
-                _person = value;
+                _customer = value;
                 OnPropertyChanged();
             }
         }
@@ -41,13 +41,13 @@ namespace CarDealer.UI.ViewModel
         {
             _eventAggregator.GetEvent<AddEditCustomerEvent>().Publish(new AddEditCustomerEventArgs
             {
-                Id = Person.CustomerID
+                Id = Customer.Id
             });
         }
 
         public async Task LoadAsync(int id)
         {
-            Person = await _personRepository.GetCustomerByIdAsync(id);
+            Customer = await _personRepository.GetCustomerByIdAsync(id);
 
         }
     }

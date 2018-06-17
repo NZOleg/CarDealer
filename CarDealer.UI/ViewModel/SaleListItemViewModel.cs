@@ -12,9 +12,9 @@ namespace CarDealer.UI.ViewModel
 {
     class SaleListItemViewModel : ViewModelBase
     {
-        private Cars_Sold _sale;
+        private CarSale _sale;
 
-        public Cars_Sold Sale
+        public CarSale Sale
         {
             get { return _sale; }
             set { _sale = value; }
@@ -22,14 +22,14 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Sale.Date_Sold + " " + Sale.Customer.Person.Username + " " + Sale.IndividualCar.CarModel.Manufacturer + " " + Sale.IndividualCar.CarModel.Model; }
+            get { return Sale.Date + " " + Sale.Customer.Person.Username + " " + Sale.IndividualCar.CarModel.Manufacturer + " " + Sale.IndividualCar.CarModel.Model; }
         }
 
         private IEventAggregator _eventAggregator;
 
         public DelegateCommand OpenSaleDetailViewCommand { get; }
 
-        public SaleListItemViewModel(Cars_Sold cars_Sold, IEventAggregator eventAggregator)
+        public SaleListItemViewModel(CarSale cars_Sold, IEventAggregator eventAggregator)
         {
             Sale = cars_Sold;
             _eventAggregator = eventAggregator;
