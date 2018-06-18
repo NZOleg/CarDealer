@@ -80,11 +80,131 @@ namespace CarDealer.DataAccess.Migrations
                     Model = "335i",
                     NumberOfSeats = 5,
                     EngineSize = 2979
+                },
+                new CarModel
+                {
+                    Manufacturer = "Nissan",
+                    Model = "Lafesta",
+                    NumberOfSeats = 7,
+                    EngineSize = 2096
+                }, 
+                new CarModel
+                {
+                    Manufacturer = "Ford",
+                    Model = "Ranger",
+                    NumberOfSeats = 4,
+                    EngineSize = 3199
+                },
+                new CarModel
+                {
+                    Manufacturer = "Toyota",
+                    Model = "Land Cruiser Prado",
+                    NumberOfSeats = 5,
+                    EngineSize = 2982
+                },
+                new CarModel
+                {
+                    Manufacturer = "Subaru",
+                    Model = "Forester",
+                    NumberOfSeats = 5,
+                    EngineSize = 1994
+                },
+                new CarModel
+                {
+                    Manufacturer = "Mazda",
+                    Model = "3",
+                    NumberOfSeats = 4,
+                    EngineSize = 2260
+                },
+                new CarModel
+                {
+                    Manufacturer = "Nissan",
+                    Model = "Teana",
+                    NumberOfSeats = 5,
+                    EngineSize = 2490
                 }
                 );
             context.SaveChanges();
 
             context.IndividualCars.AddOrUpdate(ic => ic.ImageUri,
+                new IndividualCar
+                {
+                    Colour = "Grey",
+                    CurrentMileage = 93830,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 2008,
+                    Transmission = "Automatic",
+                    Status = "available",
+                    BodyType = "Sedan",
+                    AskingPrice = 5990,
+                    ImageUri = "http://trademe.tmcdn.co.nz/photoserver/plus/814693817.jpg",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Nissan" && cm.Model == "Teana")
+                },
+                new IndividualCar
+                {
+                    Colour = "Black",
+                    CurrentMileage = 134000,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 2006,
+                    Transmission = "Manual",
+                    Status = "available",
+                    BodyType = "Hatchback",
+                    AskingPrice = 17995,
+                    ImageUri = "http://trademe.tmcdn.co.nz/photoserver/full/814684291.jpg",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Mazda" && cm.Model == "3")
+                },
+                new IndividualCar
+                {
+                    Colour = "Silver",
+                    CurrentMileage = 149100,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 2005,
+                    Transmission = "Automatic",
+                    Status = "available",
+                    BodyType = "RV/SUV",
+                    AskingPrice = 6999,
+                    ImageUri = "http://trademe.tmcdn.co.nz/photoserver/plusw/814653672.jpg",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Subaru" && cm.Model == "Forester")
+                },
+                new IndividualCar
+                {
+                    Colour = "Green",
+                    CurrentMileage = 223000,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 1996,
+                    Transmission = "Manual",
+                    Status = "available",
+                    BodyType = "RV/SUV",
+                    AskingPrice = 12400,
+                    ImageUri = "http://trademe.tmcdn.co.nz/photoserver/plusw/814649565.jpg",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Toyota" && cm.Model == "Land Cruiser Prado")
+                },
+                new IndividualCar
+                {
+                    Colour = "White",
+                    CurrentMileage = 185346,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 2009,
+                    Transmission = "Automatic",
+                    Status = "available",
+                    BodyType = "Ute",
+                    AskingPrice = 25650,
+                    ImageUri = "http://i.ebayimg.com/00/s/NDgwWDY0MA==/z/O7oAAOSw0A9axwgp/$_20.JPG?set_id=2",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Ford" && cm.Model == "Ranger")
+                },
+                new IndividualCar
+                {
+                    Colour = "Grey",
+                    CurrentMileage = 132400,
+                    DateImported = DateTime.Today,
+                    ManufactureYear = 2005,
+                    Transmission = "Automatic",
+                    Status = "available",
+                    BodyType = "Station Wagon",
+                    AskingPrice = 4300,
+                    ImageUri = "http://cdn-www.cardealpage.com/carimage/17151962/03.jpg",
+                    CarModel = context.CarModels.Single(cm => cm.Manufacturer == "Nissan" && cm.Model == "Lafesta")
+                },
                 new IndividualCar
                 {
                     Colour = "Black",
@@ -132,10 +252,59 @@ namespace CarDealer.DataAccess.Migrations
                 {
                     Name = "Oleg",
                     Address = "Auckland",
-                    Telephone = "+123456789",
+                    Telephone = "+0123456789",
                     Username = "q",
                     Password = "q"
-                });
+                },
+                new Person
+                {
+                    Name = "Mark",
+                    Address = "Wellington",
+                    Telephone = "+1011121314",
+                    Username = "Mark",
+                    Password = "Mark"
+                },
+                new Person
+                {
+                    Name = "Aman",
+                    Address = "Hamilton",
+                    Telephone = "+1516171819",
+                    Username = "Aman",
+                    Password = "Aman"
+                },
+                new Person
+                {
+                    Name = "Steven",
+                    Address = "Bejine",
+                    Telephone = "+2021222324",
+                    Username = "Steven",
+                    Password = "Steven"
+                },
+                new Person
+                {
+                    Name = "admin",
+                    Address = "9/17 Byron Ave, Takapuna, Auckland 0622",
+                    Telephone = "+2021222324",
+                    Username = "admin",
+                    Password = "admin"
+                },
+                new Person
+                {
+                    Name = "staff",
+                    Address = "3 Akoranga Dr, Northcote, Auckland 0741",
+                    Telephone = "+2021222324",
+                    Username = "staff",
+                    Password = "staff"
+                },
+                new Person
+                {
+                    Name = "customer",
+                    Address = "3/170 Wairau Road, Glenfield, Auckland 0627",
+                    Telephone = "+2021222324",
+                    Username = "customer",
+                    Password = "customer"
+                }
+                );
             context.SaveChanges();
             context.Employees.AddOrUpdate(e => e.OfficeAddress, //doesn't let me to use Person as a matching param
                 new Employee
@@ -144,7 +313,52 @@ namespace CarDealer.DataAccess.Migrations
                     PhoneExtensionNumber = "+123",
                     Role = "admin",
                     Person = context.People.Single(p => p.Username == "q")
-                });
+                },
+                new Employee
+                {
+                    OfficeAddress = "19 Lakewood Ct, Manukau, Auckland 2104",
+                    PhoneExtensionNumber = "+123",
+                    Role = "admin",
+                    Person = context.People.Single(p => p.Username == "Mark")
+                },
+                new Employee
+                {
+                    OfficeAddress = "156 Chapel Rd, Flat Bush, Auckland 2016",
+                    PhoneExtensionNumber = "+123",
+                    Role = "staff",
+                    Person = context.People.Single(p => p.Username == "Aman")
+                },
+                new Employee
+                {
+                    OfficeAddress = "9/17 Byron Ave, Takapuna, Auckland 0622",
+                    PhoneExtensionNumber = "+123",
+                    Role = "admin",
+                    Person = context.People.Single(p => p.Username == "admin")
+                },
+                new Employee
+                {
+                    OfficeAddress = "3 Akoranga Dr, Northcote, Auckland 0741",
+                    PhoneExtensionNumber = "+123",
+                    Role = "staff",
+                    Person = context.People.Single(p => p.Username == "staff")
+                }
+                );
+            context.Customers.AddOrUpdate(e => e.LicenceNumber,
+                new Customer
+                {
+                    LicenceNumber = "fdasfnj23132",
+                    LicenseExpiryDate = DateTime.Today,
+                    Person = context.People.Single(p => p.Username == "Steven")
+                },
+                new Customer
+                {
+                    LicenceNumber = "dsafsad32521",
+                    LicenseExpiryDate = DateTime.Today,
+                    Person = context.People.Single(p => p.Username == "customer")
+                }
+                );
+
+            context.SaveChanges();
         }
 
     }

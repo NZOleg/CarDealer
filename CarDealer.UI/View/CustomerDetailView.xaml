@@ -26,13 +26,13 @@
             <StackPanel.Resources>
                 <Style BasedOn="{StaticResource boldStyle}" TargetType="{x:Type Label}" />
             </StackPanel.Resources>
-            <Label  Content="Name:"/>
+            <Label  Content="LicenceNumber:"/>
+            <Label Content="Age:"/>
+            <Label Content="License Expiry Date:"/>
+            <Label Content="Name:"/>
             <Label Content="Address:"/>
             <Label Content="Telephone:"/>
-            <Label Content="Username:"/>
-            <Label Content="Licence_Number:"/>
-            <Label Content="Age:"/>
-            <Label Content="License_Expiry_Date"/>
+            <Label Content="Username"/>
 
         </StackPanel>
 

@@ -20,5 +20,6 @@ namespace CarDealer.UI.Data.Repositories
         Task<Collection<CarSale>> GetAllSalesAsync();
         Task<Collection<IndividualCar>> ApplyFilterAsync(CarFiltersViewModel carFiltersViewModel);
         Task CarIsSoldAsync(int id);
+        void AddCarModel(CarModel carModel);
     }
 }

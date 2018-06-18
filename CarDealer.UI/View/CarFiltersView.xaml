@@ -5,7 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
              mc:Ignorable="d" 
+             
+             xmlns:helper="clr-namespace:CarDealer.UI.Helpers"
              d:DesignHeight="600" d:DesignWidth="300">
+    <UserControl.Resources>
+        <helper:IntToTextConverter x:Key="IntToTextConverter" />
+    </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
             <Grid>
@@ -39,19 +44,19 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
                     <TextBox  Width="50" Text="{Binding EngineSizeMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
                     <TextBox  Width="50" Text="{Binding EngineSizeMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Content="Model Year:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
                     <TextBox  Width="50" Text="{Binding ManufactureYearMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
                     <TextBox  Width="50" Text="{Binding ManufactureYearMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Content="Transmission:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="5" Width="170" Text="{Binding Transmission,
@@ -60,10 +65,10 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
                     <TextBox  Width="50" Text="{Binding MileageMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
                     <TextBox  Width="50" Text="{Binding MileageMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" Content="Colour:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="7" Width="170" Text="{Binding Colour,
@@ -72,10 +77,10 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="8">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
                     <TextBox  Width="50" Text="{Binding AskingPriceMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
                     <TextBox  Width="50" Text="{Binding AskingPriceMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
                 </StackPanel>
                 
             </Grid>

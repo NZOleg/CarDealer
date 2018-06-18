@@ -41,7 +41,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
         </Grid>
@@ -65,28 +65,34 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Manufacturer:" Margin="10 5" />
-            <TextBox Grid.Row="0"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.Manufacturer,
+            <TextBox Grid.Row="0"  Grid.Column="1" Width="160" Text="{Binding Car.CarModel.Manufacturer,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Model:" Margin="10 5" />
-            <TextBox Grid.Row="1"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.Model,
+            <TextBox Grid.Row="1"  Grid.Column="1" Width="160" Text="{Binding Car.CarModel.Model,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Engine Size (cc):" Margin="10 5" />
-            <TextBox Grid.Row="2"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.EngineSize,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+            <TextBox Grid.Row="2"  Grid.Column="1" Width="160" Margin="10 5">
+                <Binding Path="Car.CarModel.EngineSize"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                    <Binding.ValidationRules>
+                        <c:ValidationRules Type="engineSize"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label Grid.Row="3" Grid.Column="0" Content="Manufacture Year:" Margin="10 5" />
-            <TextBox Grid.Row="3"  Grid.Column="1" Width="175"  Margin="10 5">
+            <TextBox Grid.Row="3"  Grid.Column="1" Width="160"  Margin="10 5">
                 <Binding Path="Car.ManufactureYear"
              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
                     <Binding.ValidationRules>
-                        <c:ValidationRules Type="int"/>
+                        <c:ValidationRules Type="year"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
             <Label Grid.Row="4" Grid.Column="0" Content="Transmission:" Margin="10 5" />
-            <TextBox Grid.Row="4"  Grid.Column="1" Width="175" Text="{Binding Car.Transmission,
+            <TextBox Grid.Row="4"  Grid.Column="1" Width="160" Text="{Binding Car.Transmission,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Body Type:" Margin="10 5" />
-            <TextBox Grid.Row="5"  Grid.Column="1" Width="175" Text="{Binding Car.BodyType,
+            <TextBox Grid.Row="5"  Grid.Column="1" Width="160" Text="{Binding Car.BodyType,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
            
         </Grid>
@@ -106,21 +112,39 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Colour:" Margin="10 5" />
-            <TextBox Grid.Row="0"  Grid.Column="1" Width="175" Text="{Binding Car.Colour,
+            <TextBox Grid.Row="0"  Grid.Column="1" Width="160" Text="{Binding Car.Colour,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Current Mileage:" Margin="10 5" />
-            <TextBox Grid.Row="1"  Grid.Column="1" Width="175" Text="{Binding Car.CurrentMileage,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+            <TextBox Grid.Row="1"  Grid.Column="1" Width="160" Margin="10 5">
+                <Binding Path="Car.CurrentMileage"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                    <Binding.ValidationRules>
+                        <c:ValidationRules Type="currentMileage"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label Grid.Row="2" Grid.Column="0" Content="Number Of Seats:" Margin="10 5" />
-            <TextBox  Grid.Row="2"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.NumberOfSeats,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5" />
+            <TextBox  Grid.Row="2"  Grid.Column="1" Width="160"  Margin="10 5" >
+                <Binding Path="Car.CarModel.NumberOfSeats"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                    <Binding.ValidationRules>
+                        <c:ValidationRules Type="numberOfSeats"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label Grid.Row="3" Grid.Column="0" Content="Date Imported:" Margin="10 5" />
-            <DatePicker Grid.Row="3"  Grid.Column="1" Width="175" SelectedDate="{Binding Car.DateImported,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+            <DatePicker Grid.Row="3" FontSize="20"  Grid.Column="1" Width="160" SelectedDate="{Binding Car.DateImported,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="4" Grid.Column="0" Content="Asking Price:" Margin="10 5" />
-            <TextBox Grid.Row="4"  Grid.Column="1" Width="175" Text="{Binding Car.AskingPrice,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+            <TextBox Grid.Row="4"  Grid.Column="1" Width="160" Margin="10 5">
+                <Binding Path="Car.AskingPrice"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                    <Binding.ValidationRules>
+                        <c:ValidationRules Type="askingPrice"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label Grid.Row="5" Grid.Column="0" Content="Image URI:" Margin="10 5" />
-            <TextBox Grid.Row="5"  Grid.Column="1" Width="175" Text="{Binding Car.ImageUri,
+            <TextBox Grid.Row="5"  Grid.Column="1" Width="160" Text="{Binding Car.ImageUri,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">

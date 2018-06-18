@@ -128,5 +128,11 @@ namespace CarDealer.UI.Data.Repositories
             car.Status = Constants.CAR_UNAVAILABLE;
             await Context.SaveChangesAsync();
         }
+
+        public void AddCarModel(CarModel carModel)
+        {
+            Context.CarModels.Add(carModel);
+
+        }
     }
 }

@@ -75,7 +75,8 @@ namespace CarDealer.UI.ViewModel
         public AddEditCarViewModel(ICarRepository carRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            SaveCommand = new DelegateCommand(OnSaveCommandExecute, OnSaveCanExecute);
+            //disabling save button doesn't work properly
+            SaveCommand = new DelegateCommand(OnSaveCommandExecute/*, OnSaveCanExecute*/);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _carRepository = carRepository;
             CarFeatures = new ObservableCollection<CarFeatureModelView>();
@@ -93,8 +94,7 @@ namespace CarDealer.UI.ViewModel
 
         private async void OnSaveCommandExecute()
         {
-            CarModel carModel = await _carRepository.CreateOrAssignCarModelAsync(Car.Model.CarModel);
-            Car.Model.CarModel = carModel;
+            //CarModel carModel = await _carRepository.CreateOrAssignCarModelAsync(Car.Model.CarModel);
             Car.CarFeatures = await GetSelectedFeatures();
             await _carRepository.SaveAsync();
             _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
@@ -193,6 +193,7 @@ namespace CarDealer.UI.ViewModel
                 Status = Constants.CAR_AVAILABLE
             };
             _carRepository.Add(car);
+            _carRepository.AddCarModel(car.CarModel);
             return car;
         }
         private bool OnSaveCanExecute()
@@ -227,7 +228,7 @@ namespace CarDealer.UI.ViewModel
             return Car != null
               && !Car.HasErrors
               && allFieldsAreUsed
-              && HasChanges;
+              && (Car.ModelHasChanged || HasChanges || Car.FeaturesHasChanged);
         }
     }
 }

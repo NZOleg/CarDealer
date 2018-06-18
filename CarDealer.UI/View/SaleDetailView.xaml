@@ -98,7 +98,7 @@
 
                 <Label Content="{Binding Sale.IndividualCar.CarModel.EngineSize}"/>
 
-                <Label Content="{Binding Sale.IndividualCar.NumberOfSeats}"/>
+                <Label Content="{Binding Sale.IndividualCar.CarModel.NumberOfSeats}"/>
 
                 <Label Content="{Binding Sale.IndividualCar.Status}"/>
             </StackPanel>

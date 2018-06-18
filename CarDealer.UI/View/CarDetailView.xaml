@@ -57,7 +57,7 @@
         
         <Label Content="{Binding Car.CarModel.EngineSize}"/>
         
-        <Label Content="{Binding Car.NumberOfSeats}"/>
+        <Label Content="{Binding Car.CarModel.NumberOfSeats}"/>
         
         <Label Content="{Binding Car.Status}"/>
         </StackPanel>

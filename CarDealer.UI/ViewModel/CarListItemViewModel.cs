@@ -30,7 +30,7 @@ namespace CarDealer.UI.ViewModel
         public string DisplayName
         {
             //get { return Car.CarModel.Manufacturer + " " + Car.CarModel.Model + " " +  Car.ManufactureYear; }
-            get { return $"{Car.CarModel.Manufacturer,-10} {Car.CarModel.Model,-10} {Car.ManufactureYear,-4} {Car.BodyType,-6} {Car.Transmission,-10} {Car.CurrentMileage, -6}km {Car.CarModel.EngineSize, -4}cc ${Car.AskingPrice, -7}"; }
+            get { return $"{Car.CarModel.Manufacturer,20} {Car.CarModel.Model,20} {Car.ManufactureYear,20} {Car.BodyType,20} {Car.Transmission,20} {Car.CurrentMileage+"km",20} {Car.CarModel.EngineSize + "cc",20} {"$" + Car.AskingPrice, 20}"; }
         }
 
 

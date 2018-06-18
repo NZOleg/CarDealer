@@ -22,7 +22,7 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return Sale.Date + " " + Sale.Customer.Person.Username + " " + Sale.IndividualCar.CarModel.Manufacturer + " " + Sale.IndividualCar.CarModel.Model; }
+            get { return $"{Sale.Date.ToShortDateString(),-10} {Sale.Customer.Person.Username,-10} {Sale.IndividualCar.CarModel.Manufacturer,-10} {Sale.IndividualCar.CarModel.Model,-10} {Sale.IndividualCar.ManufactureYear,-10} {Sale.Customer.Person.Telephone,-15}"; }
         }
 
         private IEventAggregator _eventAggregator;

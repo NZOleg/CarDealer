@@ -30,7 +30,7 @@ namespace CarDealer.UI.ViewModel
 
         public string DisplayName
         {
-            get { return $"{Customer.Person.Username, -10} {Customer.Person.Name,-10} {Customer.Age} {Customer.Person.Telephone,-10} {Customer.LicenceNumber}"; }
+            get { return $"{Customer.Person.Username, -15} {Customer.Person.Name,-15} {Customer.Age, -15} {Customer.Person.Telephone,-15} {Customer.LicenceNumber, -15}"; }
         }
 
 

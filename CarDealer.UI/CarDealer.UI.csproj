@@ -331,7 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Lookups\" />
-    <Folder Include="images\" />
     <Folder Include="Microsoft\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,6 +41,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="carList" ItemsSource="{Binding Employees, Mode=TwoWay}"
+                              
+                              ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
                               ItemTemplate="{StaticResource NaviItemTemplate}"/>
 
             </ScrollViewer>

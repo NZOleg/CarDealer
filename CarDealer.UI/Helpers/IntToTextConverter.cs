@@ -11,6 +11,10 @@ namespace CarDealer.UI.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if(value == null)
+            {
+                return string.Empty;
+            }
             if (value.Equals(0))
                 return string.Empty;
 
