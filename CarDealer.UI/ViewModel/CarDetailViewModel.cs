@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,18 @@ namespace CarDealer.UI.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<string> _carFeatures;
+
+        public ObservableCollection<string> CarFeatures
+        {
+            get { return _carFeatures; }
+            set {
+                _carFeatures = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private Visibility _buyVisibility;
 
@@ -65,6 +78,8 @@ namespace CarDealer.UI.ViewModel
             _personRepository = personRepository;
             EditCarViewCommand = new DelegateCommand(EditCarViewExecute);
             BuyCarCommand = new DelegateCommand(BuyCarExecute);
+
+            CarFeatures = new ObservableCollection<string>();
         }
 
         private void BuyCarExecute()
@@ -92,6 +107,16 @@ namespace CarDealer.UI.ViewModel
             }
             Car = await _carRepository.GetByIdAsync(id);
             SetLayoutForCurrentUser(role);
+            ShowCarFeatures();
+        }
+
+        private void ShowCarFeatures()
+        {
+            List<CarFeature> carFeatures = Car.CarFeatures.ToList();
+            foreach(CarFeature carFeature in carFeatures)
+            {
+                CarFeatures.Add(carFeature.Feature);
+            }
         }
 
         private void SetLayoutForCurrentUser(string role)

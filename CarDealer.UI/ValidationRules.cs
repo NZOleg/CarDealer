@@ -13,7 +13,7 @@ namespace CarDealer.UI
         public string Type { get; set; }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value == null)
+            if (value == null && Type != "filter")
             {
                 return new ValidationResult(false, "Field is required");
             }
@@ -58,6 +58,16 @@ namespace CarDealer.UI
                     if (n < 1 || n>20)
                     {
                         return new ValidationResult(false, "Your car can't have that amount of seats");
+                    }
+                    break;
+                case "filter":
+                    if (value == null)
+                    {
+                        return ValidationResult.ValidResult;
+                    }
+                    if (value.ToString() != "" && !int.TryParse(value.ToString(), out n))
+                    {
+                        return new ValidationResult(false, "Illegal characters used in this field");
                     }
                     break;
             }

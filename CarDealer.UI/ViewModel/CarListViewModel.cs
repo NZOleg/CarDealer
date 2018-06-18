@@ -14,6 +14,7 @@ namespace CarDealer.UI.ViewModel
 {
     class CarListViewModel : ViewModelBase, ICarListViewModel
     {
+        private bool _isFilterWorking { get; set; }
         private IEventAggregator _eventAggregator;
         private ICarRepository _carRepository;
 
@@ -29,17 +30,26 @@ namespace CarDealer.UI.ViewModel
             CarFiltersViewModel = new CarFiltersViewModel(_eventAggregator);
             _eventAggregator.GetEvent<FilterHasChangedEvent>()
                  .Subscribe(FilterHasChanged);
+            _isFilterWorking = false;
         }
 
         private async void FilterHasChanged(FilterHasChangedEventArgs obj)
         {
-            var cars = await _carRepository.ApplyFilterAsync(CarFiltersViewModel);
-            Cars.Clear();
-            foreach (var car in cars)
+            //Since filter is used after any field got changed, we need to make sure 
+            //that we are not running more than one process at the time
+            if (_isFilterWorking == false)
             {
-                Cars.Add(new CarListItemViewModel(car, _eventAggregator));
+                _isFilterWorking = true;
+                var cars = await _carRepository.ApplyFilterAsync(CarFiltersViewModel);
+                Cars.Clear();
+                foreach (var car in cars)
+                {
+                    Cars.Add(new CarListItemViewModel(car, _eventAggregator));
 
+                }
+                _isFilterWorking = false;
             }
+
         }
 
         public async Task LoadAsync()

@@ -5,16 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
              mc:Ignorable="d" 
+                     xmlns:viewModel="clr-namespace:CarDealer.UI.ViewModel"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:EmployeeListItemViewModel}">
+        </DataTemplate>
+        <Style x:Key="EmployeeListRowTemplate" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"  Content="{Binding Employee.Person.Username}" />
+                            <Label Grid.Column="1"  Content="{Binding Employee.Person.Name}" />
+                            <Label Grid.Column="2" Content="{Binding Employee.PhoneExtensionNumber}" />
+                            <Label Grid.Column="3" Content="{Binding Employee.Person.Telephone}" />
+                            <Label Grid.Column="4" Content="{Binding Employee.OfficeAddress}" />
+                            <Label Grid.Column="5" Content="{Binding Employee.Role}" />
+                            <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></ContentPresenter>
+                        </Grid>
+
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
-            <Button Content="{Binding DisplayName}"
+            <Button 
                     Command="{Binding OpenEmployeeDetailViewCommand}"
-                    
+                    HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"  Content="{Binding}"
+                Style="{StaticResource EmployeeListRowTemplate}"
               FontSize="16">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">

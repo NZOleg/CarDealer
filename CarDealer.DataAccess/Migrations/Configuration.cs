@@ -346,12 +346,14 @@ namespace CarDealer.DataAccess.Migrations
             context.Customers.AddOrUpdate(e => e.LicenceNumber,
                 new Customer
                 {
+                    Age=23,
                     LicenceNumber = "fdasfnj23132",
                     LicenseExpiryDate = DateTime.Today,
                     Person = context.People.Single(p => p.Username == "Steven")
                 },
                 new Customer
                 {
+                    Age = 51,
                     LicenceNumber = "dsafsad32521",
                     LicenseExpiryDate = DateTime.Today,
                     Person = context.People.Single(p => p.Username == "customer")

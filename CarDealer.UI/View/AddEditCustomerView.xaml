@@ -41,14 +41,14 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Licence_Number:" Margin="10 5" />
+            <Label Grid.Row="0" Grid.Column="0" Content="Licence Number:" Margin="10 5" />
             <TextBox Grid.Row="0"  Grid.Column="1" Width="260" Text="{Binding Customer.LicenceNumber,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Age:" Margin="10 5" />
             <TextBox Grid.Row="1"  Grid.Column="1" Width="260" Text="{Binding Customer.Age,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="License_Expiry_Date:" Margin="10 5" />
-            <DatePicker Grid.Row="2"  Grid.Column="1" Width="260" SelectedDate="{Binding Customer.LicenseExpiryDate,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="License Expiry Date:" Margin="10 5" />
+            <DatePicker FontSize="20" Grid.Row="2"  Grid.Column="1" Width="260" SelectedDate="{Binding Customer.LicenseExpiryDate,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
 
             <Label Grid.Row="3" Grid.Column="0" Content="Name:" Margin="10 5" />
             <TextBox Grid.Row="3"  Grid.Column="1" Width="260" Text="{Binding Customer.Person.Name,

@@ -10,6 +10,25 @@
         <Style x:Key="boldStyle" TargetType="{x:Type Label}">
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <DataTemplate x:Key="FeaturesItemTemplate">
+            <Label FontSize="16" Content="{Binding}" >
+                <Label.Template>
+                    <ControlTemplate TargetType="Label">
+                        <Grid x:Name="grid">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"/>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Label.Template>
+            </Label>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -61,6 +80,11 @@
         
         <Label Content="{Binding Car.Status}"/>
         </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+            <ItemsControl  x:Name="carList" ItemsSource="{Binding CarFeatures, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource FeaturesItemTemplate}"/>
 
+        </ScrollViewer>
     </Grid>
 </UserControl>

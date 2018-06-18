@@ -75,6 +75,8 @@ namespace CarDealer.UI.ViewModel
         {
             _personRepository.RemoveCustomer(Customer.Model);
             await _personRepository.SaveAsync();
+
+            _eventAggregator.GetEvent<OpenCustomerListEvent>().Publish(new OpenCustomerListEventArgs());
         }
 
         private async void OnSaveCommandExecute( PasswordBox password)

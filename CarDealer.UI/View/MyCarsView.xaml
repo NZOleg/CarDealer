@@ -4,17 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
+             
+        xmlns:viewModel="clr-namespace:CarDealer.UI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:SaleListItemViewModel}">
+        </DataTemplate>
+        <Style x:Key="SaleListRowTemplate" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"  Content="{Binding FormattedDate}" />
+                            <Label Grid.Column="1"  Content="{Binding Sale.Customer.Person.Username}" />
+                            <Label Grid.Column="2" Content="{Binding Sale.IndividualCar.CarModel.Manufacturer}" />
+                            <Label Grid.Column="3" Content="{Binding Sale.IndividualCar.CarModel.Model}" />
+                            <Label Grid.Column="4" Content="{Binding Sale.IndividualCar.ManufactureYear}" />
+                            <Label Grid.Column="5" Content="{Binding Sale.Customer.Person.Telephone}" />
+                            <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></ContentPresenter>
+                        </Grid>
+
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
-            <Button Content="{Binding DisplayName}"
+            <Button 
                     Command="{Binding OpenSaleDetailViewCommand}"
-                    
+                   HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"  Content="{Binding}"
+                Style="{StaticResource SaleListRowTemplate}"
               FontSize="16">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">

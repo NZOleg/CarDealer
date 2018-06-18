@@ -12,12 +12,50 @@
         <DataTemplate DataType="{x:Type viewModel:CarFiltersViewModel}">
             <view:CarFiltersView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CarListItemViewModel}">
+        </DataTemplate>
+        <Style x:Key="CarListRowTemplate" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"  Content="{Binding Car.CarModel.Manufacturer}" />
+                            <Label Grid.Column="1"  Content="{Binding Car.CarModel.Model}" />
+                            <Label Grid.Column="2" Content="{Binding Car.ManufactureYear}" />
+                            <Label Grid.Column="3" Content="{Binding Car.BodyType}" />
+                            <Label Grid.Column="4" Content="{Binding Car.Transmission}" />
+                            <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                <Label Content="{Binding Car.CurrentMileage}" />
+                                <Label Content="km" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="6" Orientation="Horizontal">
+                                <Label Content="{Binding Car.CarModel.EngineSize}" />
+                                <Label Content="cc" />
+                            </StackPanel>
+                            <Label Grid.Column="7" Content="{Binding Car.AskingPrice}" />
+                            <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></ContentPresenter>
+                        </Grid>
+
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
-            <Button HorizontalContentAlignment="Left" HorizontalAlignment="Left" Content="{Binding DisplayName}"
+            <Button Style="{StaticResource CarListRowTemplate}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Content="{Binding }"
                     Command="{Binding OpenCarDetailViewCommand}"
                     
               FontSize="16">
@@ -26,6 +64,7 @@
                         <Grid x:Name="grid">
                             <ContentPresenter HorizontalAlignment="Left"
                                                       VerticalAlignment="Top"/>
+                            
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">

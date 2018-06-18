@@ -86,7 +86,7 @@ namespace CarDealer.UI.Data.Repositories
         {
 
             Context.Employees.Remove(employee);
-            Context.People.Remove(employee.Person);
+            //Context.People.Remove(employee.Person);
         }
 
         public async Task<Collection<Employee>> GetAllEmployeesAsync()

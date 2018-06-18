@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
              mc:Ignorable="d" 
-             
+                          xmlns:c="clr-namespace:CarDealer.UI"
              xmlns:helper="clr-namespace:CarDealer.UI.Helpers"
              d:DesignHeight="600" d:DesignWidth="300">
     <UserControl.Resources>
@@ -34,6 +34,7 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Content="Manufacturer:" Margin="10 5" />
                 <TextBox Grid.Column="1" Width="170" Text="{Binding Manufacturer,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+               
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Model:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="1" Width="170" Text="{Binding Model,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
@@ -43,20 +44,45 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Content="Engine Size:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
-                    <TextBox  Width="50" Text="{Binding EngineSizeMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="EngineSizeMin"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
-                    <TextBox  Width="50" Text="{Binding EngineSizeMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="EngineSizeMax"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Content="Model Year:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
-                    <TextBox  Width="50" Text="{Binding ManufactureYearMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="ManufactureYearMin"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
-                    <TextBox  Width="50" Text="{Binding ManufactureYearMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="ManufactureYearMax"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Content="Transmission:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="5" Width="170" Text="{Binding Transmission,
@@ -64,11 +90,23 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Content="Mileage:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
-                    <TextBox  Width="50" Text="{Binding MileageMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="MileageMin"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
-                    <TextBox  Width="50" Text="{Binding MileageMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="MileageMax"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </StackPanel>
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" Content="Colour:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="7" Width="170" Text="{Binding Colour,
@@ -76,11 +114,23 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Content="Asking Price:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="8">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
-                    <TextBox  Width="50" Text="{Binding AskingPriceMin,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="AskingPriceMin"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                     <Label FontSize="10" VerticalAlignment="Center" Content="to"/>
-                    <TextBox  Width="50" Text="{Binding AskingPriceMax,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
+                    <TextBox Width="50" Margin="10 5">
+                        <Binding Path="AskingPriceMax"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                            <Binding.ValidationRules>
+                                <c:ValidationRules Type="filter"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                 </StackPanel>
                 
             </Grid>
