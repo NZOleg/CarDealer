@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -74,7 +75,7 @@ namespace CarDealer.UI.ViewModel
         public AddEditCarViewModel(ICarRepository carRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            SaveCommand = new DelegateCommand(OnSaveCommandExecute);
+            SaveCommand = new DelegateCommand(OnSaveCommandExecute, OnSaveCanExecute);
             DeleteCommand = new DelegateCommand(OnDeleteCommandExecute);
             _carRepository = carRepository;
             CarFeatures = new ObservableCollection<CarFeatureModelView>();
@@ -96,7 +97,8 @@ namespace CarDealer.UI.ViewModel
             Car.Model.CarModel = carModel;
             Car.CarFeatures = await GetSelectedFeatures();
             await _carRepository.SaveAsync();
-                
+            _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
+
         }
 
         private async Task<Collection<CarFeature>> GetSelectedFeatures()
@@ -175,10 +177,8 @@ namespace CarDealer.UI.ViewModel
                 {
                     HasChanges = _carRepository.HasChanges();
                 }
-                if (e.PropertyName == nameof(Car.HasErrors))
-                {
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
+
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
@@ -194,6 +194,40 @@ namespace CarDealer.UI.ViewModel
             };
             _carRepository.Add(car);
             return car;
+        }
+        private bool OnSaveCanExecute()
+        {
+            //if car is not loaded return false
+            if(Car == null)
+            {
+                return false;
+            }
+            bool allFieldsAreUsed = true;
+            foreach (PropertyInfo prop in Car.GetType().GetProperties())
+            {
+                
+                Type type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+                switch (Type.GetTypeCode(type))
+                {
+                    case TypeCode.Int32:
+                    case TypeCode.Decimal:
+                        if ((prop.GetValue(Car, null) == null || (int)prop.GetValue(Car) == 0) && prop.Name != "Id" )
+                        {
+                            allFieldsAreUsed = false;
+                        }
+                        break;
+                    case TypeCode.String:
+                        if (prop.GetValue(Car, null) == null || (string)prop.GetValue(Car) == "")
+                        {
+                            allFieldsAreUsed = false;
+                        }
+                        break;
+                }
+            }
+            return Car != null
+              && !Car.HasErrors
+              && allFieldsAreUsed
+              && HasChanges;
         }
     }
 }

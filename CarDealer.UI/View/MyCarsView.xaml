@@ -13,7 +13,7 @@
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
             <Button Content="{Binding DisplayName}"
-                    Command="{Binding OpenCarDetailViewCommand}"
+                    Command="{Binding OpenSaleDetailViewCommand}"
                     
               FontSize="16">
                 <Button.Template>

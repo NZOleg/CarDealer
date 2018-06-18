@@ -7,11 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBox Text="{Binding Price, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="316,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="316,260,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Price" HorizontalAlignment="Left" Margin="217,201,0,0" VerticalAlignment="Top"/>
-        <Label Content="Date" HorizontalAlignment="Left" Margin="217,265,0,0" VerticalAlignment="Top"/>
-        <Button Content="Buy" Command="{Binding BuyCarCommand}" HorizontalAlignment="Left" Margin="345,337,0,0" VerticalAlignment="Top" Width="75"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Price must be more than 80% of asking price!" HorizontalAlignment="Center" FontSize="14" Foreground="Red" FontWeight="Bold" Visibility="{Binding InvalidPriceVisibility}" />
+            <StackPanel Orientation="Horizontal">
 
+                <Label Content="Asking price:$" HorizontalAlignment="Center" FontSize="14" Foreground="Red" FontWeight="Bold" Visibility="{Binding InvalidPriceVisibility}" />
+
+                <Label Content="{Binding Car.AskingPrice}" HorizontalAlignment="Center" FontSize="14" Foreground="Red" FontWeight="Bold" Visibility="{Binding InvalidPriceVisibility}" />
+            </StackPanel>
+            <Label Content="Price" />
+            <TextBox Margin="5" Height="34" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay}" Width="240"/>
+            <Label Content="Date" />
+
+            <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}"  HorizontalAlignment="Center" Height="34" VerticalAlignment="Center" Width="240"/>
+            <Button Content="Buy" Command="{Binding BuyCarCommand}" Width="75" Margin="10"/>
+        </StackPanel>
     </Grid>
 </UserControl>

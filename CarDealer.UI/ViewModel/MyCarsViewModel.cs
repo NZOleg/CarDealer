@@ -1,5 +1,6 @@
 ﻿using CarDealer.DataAccess;
 using CarDealer.UI.Data.Repositories;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,21 +12,28 @@ namespace CarDealer.UI.ViewModel
 {
     class MyCarsViewModel : ViewModelBase, IMyCarsViewModel
     {
+        private IEventAggregator _eventAggregator;
         private IPersonRepository _personRepository;
 
 
-        public ObservableCollection<CarSale> Cars { get; set; }
+        public ObservableCollection<SaleListItemViewModel> Cars { get; set; }
 
-        public MyCarsViewModel(IPersonRepository personRepository)
+        public MyCarsViewModel(IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             _personRepository = personRepository;
-            Cars = new ObservableCollection<CarSale>();
+            Cars = new ObservableCollection<SaleListItemViewModel>();
+
         }
 
         public async Task LoadAsync(int id)
         {
             var cars = await _personRepository.GetAllCustomerCars(id);
-            Cars = new ObservableCollection<CarSale>(cars);
+            foreach (var carSale in cars)
+            {
+                Cars.Add(new SaleListItemViewModel(carSale, _eventAggregator));
+            }
+            
 
         }
     }

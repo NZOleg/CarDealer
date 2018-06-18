@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarDealer.UI.ViewModel
 {
@@ -20,6 +21,15 @@ namespace CarDealer.UI.ViewModel
         private IEventAggregator _eventAggregator;
         private ICarRepository _carRepository;
         private IPersonRepository _personRepository;
+
+        private Visibility _invalidPriceVisibility;
+
+        public Visibility InvalidPriceVisibility
+        {
+            get { return _invalidPriceVisibility; }
+            set { _invalidPriceVisibility = value; }
+        }
+
 
         public DelegateCommand BuyCarCommand { get; }
 
@@ -73,12 +83,17 @@ namespace CarDealer.UI.ViewModel
             _personRepository = personRepository;
             BuyCarCommand = new DelegateCommand(OnBuyCarExecute);
             Date = DateTime.Now;
+            InvalidPriceVisibility = Visibility.Hidden;
         }
 
         private async void OnBuyCarExecute()
         {
+            if (Car.AskingPrice*0.8 >= Price)
+            {
+                InvalidPriceVisibility = Visibility.Visible;
+            }
             var result = await MessageDialogService.ShowOkCancelDialogAsync($"Do you really want to buy {Car.CarModel.Manufacturer} {Car.CarModel.Model} {Car.ManufactureYear}?",
-              "Question");
+              "Confirmation");
             if (result == MessageDialogResult.Cancel)
             {
                 _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
@@ -93,6 +108,7 @@ namespace CarDealer.UI.ViewModel
             };
             await _personRepository.AddNewSaleAsync(Car.Id, Customer.Id, cars_Sold);
             await _carRepository.CarIsSoldAsync(Car.Id);
+            _eventAggregator.GetEvent<OpenCarListEvent>().Publish(new OpenCarListEventArgs());
         }
 
         public async Task LoadAsync(int carId, int customerId)

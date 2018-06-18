@@ -23,12 +23,25 @@ namespace CarDealer.UI.ViewModel
         public ICommand CreateAccountCommand { get; set; }
         public string UserName { get; set; }
 
+        private Visibility _invalidLoginVisibility;
+
+        public Visibility InvalidLoginVisibility
+        {
+            get { return _invalidLoginVisibility; }
+            set
+            {
+                _invalidLoginVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         public LoginViewModel(IPersonRepository personRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _personRepository = personRepository;
             LoginUserCommand = new DelegateCommand<PasswordBox>(OnLoginExecute);
             CreateAccountCommand = new DelegateCommand<Object>(OnCreateAccountExecute);
+            InvalidLoginVisibility = Visibility.Hidden;
         }
 
         private void OnCreateAccountExecute(object obj)
@@ -44,6 +57,7 @@ namespace CarDealer.UI.ViewModel
             Person person = await _personRepository.GetByUsernameAndPasswordAsync(UserName, password.Password);
             if (person == null)
             {
+                InvalidLoginVisibility = Visibility.Visible;
                 return;
             }
             string role = await _personRepository.GetPersonRole(person.Id);

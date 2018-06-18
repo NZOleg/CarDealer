@@ -177,10 +177,10 @@ namespace CarDealer.UI.ViewModel
             await CurrentView.LoadAsync(obj.Id);
         }
 
-        private async void OpenSaleDetailsAsync(OpenSaleDetailViewEventArgs obj)
+        private void OpenSaleDetailsAsync(OpenSaleDetailViewEventArgs obj)
         {
             CurrentView = _saleDetailViewModelCreator();
-            await CurrentView.Load(obj.Sale);
+            CurrentView.Load(obj.Sale);
         }
 
         private async void OpenSalePageAsync(OpenSaleListEventArgs obj)

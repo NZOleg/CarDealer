@@ -70,7 +70,7 @@
             <Label Grid.Row="1" Grid.Column="0" Content="Model:" Margin="10 5" />
             <TextBox Grid.Row="1"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.Model,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Engine Size:" Margin="10 5" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Engine Size (cc):" Margin="10 5" />
             <TextBox Grid.Row="2"  Grid.Column="1" Width="175" Text="{Binding Car.CarModel.EngineSize,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Manufacture Year:" Margin="10 5" />

@@ -123,14 +123,12 @@ namespace CarDealer.UI.ViewModel
             ObservableCollection<MenuItemViewModel> adminMenuItems = new ObservableCollection<MenuItemViewModel>();
             ObservableCollection<MenuItemViewModel> saleMenuItems = new ObservableCollection<MenuItemViewModel>()
             {
-                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand),
-                new MenuItemViewModel("Statistics"),
+                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand)
             };
             ObservableCollection<MenuItemViewModel> carMenuItems = new ObservableCollection<MenuItemViewModel>
             {
                 new MenuItemViewModel("Add a New Car", CreateNewCarCommand),
-                new MenuItemViewModel("Display All Cars", ShowCarListCommand),
-                new MenuItemViewModel("Car Models")
+                new MenuItemViewModel("Display All Cars", ShowCarListCommand)
             };
             ObservableCollection<MenuItemViewModel> CustomerMenuItems = new ObservableCollection<MenuItemViewModel>
             {
@@ -149,14 +147,12 @@ namespace CarDealer.UI.ViewModel
             ObservableCollection<MenuItemViewModel> adminMenuItems = new ObservableCollection<MenuItemViewModel>();
             ObservableCollection<MenuItemViewModel> saleMenuItems = new ObservableCollection<MenuItemViewModel>()
             {
-                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand),
-                new MenuItemViewModel("Statistics"),
+                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand)
             };
             ObservableCollection<MenuItemViewModel> carMenuItems = new ObservableCollection<MenuItemViewModel>
             {
                 new MenuItemViewModel("Add a New Car", CreateNewCarCommand),
-                new MenuItemViewModel("Display All Cars", ShowCarListCommand),
-                new MenuItemViewModel("Car Models")
+                new MenuItemViewModel("Display All Cars", ShowCarListCommand)
             };
             ObservableCollection<MenuItemViewModel> CustomerMenuItems = new ObservableCollection<MenuItemViewModel>
             {

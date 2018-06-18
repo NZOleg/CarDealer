@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
              
+             xmlns:helper="clr-namespace:CarDealer.UI.Helpers"
              xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <helper:IntToTextConverter x:Key="IntToTextConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -42,10 +46,10 @@
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Age:" Margin="10 5" />
             <TextBox Grid.Row="1"  Grid.Column="1" Width="260" Text="{Binding Customer.Age,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTextConverter}}" Margin="10 5"/>
             <Label Grid.Row="2" Grid.Column="0" Content="License_Expiry_Date:" Margin="10 5" />
-            <TextBox Grid.Row="2"  Grid.Column="1" Width="260" Text="{Binding Customer.LicenseExpiryDate,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+            <DatePicker Grid.Row="2"  Grid.Column="1" Width="260" SelectedDate="{Binding Customer.LicenseExpiryDate,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
+
             <Label Grid.Row="3" Grid.Column="0" Content="Name:" Margin="10 5" />
             <TextBox Grid.Row="3"  Grid.Column="1" Width="260" Text="{Binding Customer.Person.Name,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
