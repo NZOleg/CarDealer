@@ -14,6 +14,7 @@ namespace CarDealer.DataAccess
         public IndividualCar()
         {
             CarFeatures = new Collection<CarFeature>();
+            CarSale = new Collection<CarSale>();
 
         }
 
@@ -53,7 +54,8 @@ namespace CarDealer.DataAccess
         [Required]
         public virtual CarModel CarModel { get; set; }
 
-        public virtual CarSale CarSale { get; set; }
+        //for part B to be able to sell car a few times
+        public virtual ICollection<CarSale> CarSale { get; set; }
 
         public virtual ICollection<CarFeature> CarFeatures { get; set; }
     }

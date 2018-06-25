@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace CarDealer.UI.Event
 {
-    class AfterLogoutEvent: PubSubEvent<AfterLogoutEventArgs>
+    class SaleFilterHasChangedEvent : PubSubEvent<SaleFilterHasChangedEventArgs>
     {
     }
 
-    public class AfterLogoutEventArgs
+    public class SaleFilterHasChangedEventArgs
     {
+        public SaleFilters SaleFilter { get; set; }
     }
 }

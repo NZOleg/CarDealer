@@ -1,7 +1,10 @@
 ﻿using CarDealer.UI.Event;
+using CarDealer.UI.Helpers;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +16,22 @@ namespace CarDealer.UI.ViewModel
         public CarFiltersViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            SortByPopularity = SortBySalesEnum.MostPopular;
         }
+
+        private int? _numberOfCars;
+
+        public int? NumberOfCars
+        {
+            get { return _numberOfCars; }
+            set {
+                _numberOfCars = value;
+                OnPropertyChanged();
+                _eventAggregator.GetEvent<FilterHasChangedEvent>().Publish(new FilterHasChangedEventArgs());
+            }
+        }
+
+
         private string _manufacturer;
 
         public string Manufacturer
@@ -26,6 +44,20 @@ namespace CarDealer.UI.ViewModel
                 _eventAggregator.GetEvent<FilterHasChangedEvent>().Publish(new FilterHasChangedEventArgs());
             }
         }
+
+        private SortBySalesEnum _sortByPopularity;
+
+        public SortBySalesEnum SortByPopularity
+        {
+            get { return _sortByPopularity; }
+            set {
+                _sortByPopularity = value;
+                OnPropertyChanged();
+                _eventAggregator.GetEvent<FilterHasChangedEvent>().Publish(new FilterHasChangedEventArgs());
+            }
+        }
+
+
         private string _model;
 
         public string Model

@@ -27,7 +27,10 @@ namespace CarDealer.UI.ViewModel
         public Visibility InvalidPriceVisibility
         {
             get { return _invalidPriceVisibility; }
-            set { _invalidPriceVisibility = value; }
+            set {
+                _invalidPriceVisibility = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -91,6 +94,7 @@ namespace CarDealer.UI.ViewModel
             if (Car.AskingPrice*0.8 >= Price)
             {
                 InvalidPriceVisibility = Visibility.Visible;
+                return;
             }
             var result = await MessageDialogService.ShowOkCancelDialogAsync($"Do you really want to buy {Car.CarModel.Manufacturer} {Car.CarModel.Model} {Car.ManufactureYear}?",
               "Confirmation");

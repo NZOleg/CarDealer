@@ -114,8 +114,10 @@
     <Compile Include="Event\OpenMainPageEvent.cs" />
     <Compile Include="Event\OpenSaleDetailViewEvent.cs" />
     <Compile Include="Event\OpenSaleListEvent.cs" />
+    <Compile Include="Event\SaleFilterHasChangedEvent.cs" />
     <Compile Include="Event\ShowMyCarsEvent.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\IntToTextConverter.cs" />
     <Compile Include="Helpers\MenuItemContainerTemplateSelector.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\MyCarsViewModel.cs" />
     <Compile Include="ViewModel\SaleDetailViewModel.cs" />
+    <Compile Include="ViewModel\SaleFiltersViewModel.cs" />
     <Compile Include="ViewModel\SaleListItemViewModel.cs" />
     <Compile Include="ViewModel\SaleListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -204,6 +207,9 @@
     </Compile>
     <Compile Include="View\SaleDetailView.xaml.cs">
       <DependentUpon>SaleDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SaleFiltersView.xaml.cs">
+      <DependentUpon>SaleFiltersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SalesListView.xaml.cs">
       <DependentUpon>SalesListView.xaml</DependentUpon>
@@ -284,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SaleDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SaleFiltersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

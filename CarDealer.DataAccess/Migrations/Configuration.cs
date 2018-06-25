@@ -12,51 +12,50 @@ namespace CarDealer.DataAccess.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-
         protected override void Seed(CarDealer.DataAccess.CarDealerDbContext context)
         {
             context.CarFeatures.AddOrUpdate(cf => cf.Feature,
-                new CarFeature
-                {
-                    Feature = "Anti-Lock Brakes",
-                    Description = "Cars with anti-lock brakes are much safer. When you have to slam on the brakes to avoid an accident, you do not want the brakes locking up."
-                },
-                new CarFeature
-                {
-                    Feature = "Airbags",
-                    Description = "Airbags help to greatly reduce the threat of injury when in a collision."
-                },
-                              new CarFeature
-                              {
-                                  Feature = "Rear Camera/Sensors",
-                                  Description = "The rearview camera allows you to see behind the vehicle without having to maneuver using mirrors."
-                              },
-                              new CarFeature
-                              {
-                                  Feature = "4-Wheel Drive",
-                                  Description = "For driving in bad weather, having four-wheel drive capability is much safer and will ensure that you can navigate through snow and poor road conditions."
-                              },
-                              new CarFeature
-                              {
-                                  Feature = "Third Row Seating",
-                                  Description = "As families grow, your vehicle needs more space. Third row seating allows everyone to be comfortable while traveling."
-                              },
-                              new CarFeature
-                              {
-                                  Feature = "Rear Seat Entertainment",
-                                  Description = "Having the DVD system for the children while they ride in the back seats makes traveling anywhere much easier. "
-                              },
-                              new CarFeature
-                              {
-                                  Feature = "Infotainment System",
-                                  Description = "Rear seat entertainment is great, but how about for the entire vehicle? A great infotainment system will include things like iPod hookups and more."
-                              },
-                              new CarFeature
-                              {
-                                  Feature = "Programmable Keys",
-                                  Description = "Only those with the correct key will be able to start your vehicle. This is a great feature if there happens to be a teen driver in the household."
-                              }
-                              );
+                            new CarFeature
+                            {
+                                Feature = "Anti-Lock Brakes",
+                                Description = "Cars with anti-lock brakes are much safer. When you have to slam on the brakes to avoid an accident, you do not want the brakes locking up."
+                            },
+                            new CarFeature
+                            {
+                                Feature = "Airbags",
+                                Description = "Airbags help to greatly reduce the threat of injury when in a collision."
+                            },
+                                          new CarFeature
+                                          {
+                                              Feature = "Rear Camera/Sensors",
+                                              Description = "The rearview camera allows you to see behind the vehicle without having to maneuver using mirrors."
+                                          },
+                                          new CarFeature
+                                          {
+                                              Feature = "4-Wheel Drive",
+                                              Description = "For driving in bad weather, having four-wheel drive capability is much safer and will ensure that you can navigate through snow and poor road conditions."
+                                          },
+                                          new CarFeature
+                                          {
+                                              Feature = "Third Row Seating",
+                                              Description = "As families grow, your vehicle needs more space. Third row seating allows everyone to be comfortable while traveling."
+                                          },
+                                          new CarFeature
+                                          {
+                                              Feature = "Rear Seat Entertainment",
+                                              Description = "Having the DVD system for the children while they ride in the back seats makes traveling anywhere much easier. "
+                                          },
+                                          new CarFeature
+                                          {
+                                              Feature = "Infotainment System",
+                                              Description = "Rear seat entertainment is great, but how about for the entire vehicle? A great infotainment system will include things like iPod hookups and more."
+                                          },
+                                          new CarFeature
+                                          {
+                                              Feature = "Programmable Keys",
+                                              Description = "Only those with the correct key will be able to start your vehicle. This is a great feature if there happens to be a teen driver in the household."
+                                          }
+                                          );
             context.SaveChanges();
 
             context.CarModels.AddOrUpdate(cm => cm.Model,
@@ -87,7 +86,7 @@ namespace CarDealer.DataAccess.Migrations
                     Model = "Lafesta",
                     NumberOfSeats = 7,
                     EngineSize = 2096
-                }, 
+                },
                 new CarModel
                 {
                     Manufacturer = "Ford",
@@ -346,7 +345,7 @@ namespace CarDealer.DataAccess.Migrations
             context.Customers.AddOrUpdate(e => e.LicenceNumber,
                 new Customer
                 {
-                    Age=23,
+                    Age = 23,
                     LicenceNumber = "fdasfnj23132",
                     LicenseExpiryDate = DateTime.Today,
                     Person = context.People.Single(p => p.Username == "Steven")
@@ -362,6 +361,5 @@ namespace CarDealer.DataAccess.Migrations
 
             context.SaveChanges();
         }
-
     }
 }

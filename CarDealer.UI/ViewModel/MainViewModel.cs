@@ -143,6 +143,7 @@ namespace CarDealer.UI.ViewModel
 
         }
 
+
         private async void OpenMyCarsAsync(ShowMyCarsEventArgs obj)
         {
             CurrentView = _myCarsViewModelCreator();

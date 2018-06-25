@@ -15,6 +15,4 @@ C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataA
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.pdb
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.Initial.resources
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.csproj.GenerateResource.cache
-C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.ManufactuureYearRequired.resources
-C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.CarModelIsRequired.resources
-C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.ImageUriAdded.resources
+C:\Users\Olegok\Desktop\CarDealer\CarDealer.DataAccess\obj\Debug\CarDealer.DataAccess.Migrations.mapStoredProcedures.resources

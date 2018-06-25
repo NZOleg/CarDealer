@@ -80,7 +80,7 @@ namespace CarDealer.UI.Data.Repositories
         {
 
             Context.Customers.Remove(customer);
-            Context.People.Remove(customer.Person);
+            //Context.People.Remove(customer.Person);
         }
         public void RemoveEmployee(Employee employee)
         {

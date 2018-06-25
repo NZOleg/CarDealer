@@ -9,4 +9,3 @@ C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\bin\Debug\EntityFramework.SqlS
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.csproj.CopyComplete
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.dll
 C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.pdb
-C:\Users\Olegok\Desktop\CarDealer\CarDealer.Model\obj\Debug\CarDealer.Model.csprojAssemblyReference.cache

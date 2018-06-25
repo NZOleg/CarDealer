@@ -1,4 +1,5 @@
 ﻿using CarDealer.DataAccess;
+using CarDealer.UI.Helpers;
 using CarDealer.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,6 @@ namespace CarDealer.UI.Data.Repositories
         Task<Collection<IndividualCar>> ApplyFilterAsync(CarFiltersViewModel carFiltersViewModel);
         Task CarIsSoldAsync(int id);
         void AddCarModel(CarModel carModel);
+        Task<Collection<CarSale>> ApplySaleFilterAsync(SaleFiltersViewModel saleFiltersViewModel, SaleFilters saleFilter);
     }
 }

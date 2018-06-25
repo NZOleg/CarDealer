@@ -50,21 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarDealerDbContext.cs" />
-    <Compile Include="Migrations\201806160855364_Initial.cs" />
-    <Compile Include="Migrations\201806160855364_Initial.Designer.cs">
-      <DependentUpon>201806160855364_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201806220724410_Initial.cs" />
+    <Compile Include="Migrations\201806220724410_Initial.Designer.cs">
+      <DependentUpon>201806220724410_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806160922041_ManufactuureYearRequired.cs" />
-    <Compile Include="Migrations\201806160922041_ManufactuureYearRequired.Designer.cs">
-      <DependentUpon>201806160922041_ManufactuureYearRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806160928164_CarModelIsRequired.cs" />
-    <Compile Include="Migrations\201806160928164_CarModelIsRequired.Designer.cs">
-      <DependentUpon>201806160928164_CarModelIsRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806161204371_ImageUriAdded.cs" />
-    <Compile Include="Migrations\201806161204371_ImageUriAdded.Designer.cs">
-      <DependentUpon>201806161204371_ImageUriAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201806250840582_mapStoredProcedures.cs" />
+    <Compile Include="Migrations\201806250840582_mapStoredProcedures.Designer.cs">
+      <DependentUpon>201806250840582_mapStoredProcedures.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,17 +75,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806160855364_Initial.resx">
-      <DependentUpon>201806160855364_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806220724410_Initial.resx">
+      <DependentUpon>201806220724410_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806160922041_ManufactuureYearRequired.resx">
-      <DependentUpon>201806160922041_ManufactuureYearRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806160928164_CarModelIsRequired.resx">
-      <DependentUpon>201806160928164_CarModelIsRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806161204371_ImageUriAdded.resx">
-      <DependentUpon>201806161204371_ImageUriAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806250840582_mapStoredProcedures.resx">
+      <DependentUpon>201806250840582_mapStoredProcedures.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

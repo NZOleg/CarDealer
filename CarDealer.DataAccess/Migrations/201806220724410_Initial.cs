@@ -25,11 +25,12 @@ namespace CarDealer.DataAccess.Migrations
                         Colour = c.String(nullable: false, maxLength: 50),
                         CurrentMileage = c.Int(nullable: false),
                         DateImported = c.DateTime(nullable: false),
-                        ManufactureYear = c.Int(),
+                        ManufactureYear = c.Int(nullable: false),
                         Transmission = c.String(nullable: false, maxLength: 50),
                         Status = c.String(nullable: false, maxLength: 50),
                         BodyType = c.String(nullable: false, maxLength: 50),
                         AskingPrice = c.Int(nullable: false),
+                        ImageUri = c.String(),
                         CarModel_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -43,8 +44,8 @@ namespace CarDealer.DataAccess.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Model = c.String(nullable: false, maxLength: 50),
                         Manufacturer = c.String(nullable: false, maxLength: 50),
-                        NumberOfSeats = c.Int(),
-                        EngineSize = c.Int(),
+                        NumberOfSeats = c.Int(nullable: false),
+                        EngineSize = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -52,16 +53,17 @@ namespace CarDealer.DataAccess.Migrations
                 "dbo.CarSale",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         SalePrice = c.Int(nullable: false),
                         Date = c.DateTime(nullable: false, storeType: "date"),
                         Customer_Id = c.Int(nullable: false),
+                        IndividualCar_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customer", t => t.Customer_Id, cascadeDelete: true)
-                .ForeignKey("dbo.IndividualCar", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.Customer_Id);
+                .ForeignKey("dbo.IndividualCar", t => t.IndividualCar_Id, cascadeDelete: true)
+                .Index(t => t.Customer_Id)
+                .Index(t => t.IndividualCar_Id);
             
             CreateTable(
                 "dbo.Customer",
@@ -119,7 +121,7 @@ namespace CarDealer.DataAccess.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.CarSale", "Id", "dbo.IndividualCar");
+            DropForeignKey("dbo.CarSale", "IndividualCar_Id", "dbo.IndividualCar");
             DropForeignKey("dbo.CarSale", "Customer_Id", "dbo.Customer");
             DropForeignKey("dbo.Customer", "Id", "dbo.Person");
             DropForeignKey("dbo.Employee", "Id", "dbo.Person");
@@ -130,8 +132,8 @@ namespace CarDealer.DataAccess.Migrations
             DropIndex("dbo.IndividualCarCarFeatures", new[] { "IndividualCar_Id" });
             DropIndex("dbo.Employee", new[] { "Id" });
             DropIndex("dbo.Customer", new[] { "Id" });
+            DropIndex("dbo.CarSale", new[] { "IndividualCar_Id" });
             DropIndex("dbo.CarSale", new[] { "Customer_Id" });
-            DropIndex("dbo.CarSale", new[] { "Id" });
             DropIndex("dbo.IndividualCar", new[] { "CarModel_Id" });
             DropTable("dbo.IndividualCarCarFeatures");
             DropTable("dbo.Employee");

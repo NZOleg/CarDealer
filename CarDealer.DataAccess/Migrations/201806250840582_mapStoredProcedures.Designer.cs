@@ -7,13 +7,13 @@ namespace CarDealer.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class mapStoredProcedures : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(mapStoredProcedures));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806160855364_Initial"; }
+            get { return "201806250840582_mapStoredProcedures"; }
         }
         
         string IMigrationMetadata.Source

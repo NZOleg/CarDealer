@@ -119,13 +119,53 @@ namespace CarDealer.UI.Data.Repositories
             {
                 query = query.Where(ic => ic.AskingPrice <= carFiltersViewModel.AskingPriceMax);
             }
-            return new Collection<IndividualCar>( await query.ToListAsync());
+            if (carFiltersViewModel.SortByPopularity == SortBySalesEnum.LeastPopular)
+            {
+                query = query.OrderBy(ic => ic.CarSale.Count());
+            }
+            else
+            {
+                Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+                query = query.OrderByDescending(ic => ic.CarSale.Count());
+            }
+
+            if (carFiltersViewModel.NumberOfCars != null && carFiltersViewModel.NumberOfCars != 0)
+            {
+                return new Collection<IndividualCar>(await query.Take((int)carFiltersViewModel.NumberOfCars).ToListAsync());
+            }
+
+            return new Collection<IndividualCar>(await query.ToListAsync());
         }
+
+        public async Task<Collection<CarSale>> ApplySaleFilterAsync(SaleFiltersViewModel saleFiltersViewModel, SaleFilters saleFilter)
+        {
+            switch (saleFilter)
+            {
+                case SaleFilters.MonthFilter:
+                    DateTime endDate = saleFiltersViewModel.SelectedMonth.AddMonths(1);
+                    return new Collection<CarSale>(await Context.Cars_Sold.Where(cs => cs.Date >= saleFiltersViewModel.SelectedMonth && cs.Date < endDate).ToListAsync());
+                case SaleFilters.RangeFilter:
+                    var sales = Context.Cars_Sold.Where(cs => cs.IndividualCar != null); //fetch all cars
+                    if (saleFiltersViewModel.StartDate != null)
+                    {
+                        sales = sales.Where(cs => cs.Date >= saleFiltersViewModel.StartDate);
+                    }
+                    if (saleFiltersViewModel.EndDate != null)
+                    {
+                        sales = sales.Where(cs => cs.Date <= saleFiltersViewModel.EndDate);
+                    }
+                    return new Collection<CarSale>(await sales.ToListAsync());
+                default:
+                    return null;
+            }
+        }
+
 
         public async Task CarIsSoldAsync(int id)
         {
             IndividualCar car = await Context.IndividualCars.Where(ic => ic.Id == id).SingleOrDefaultAsync();
-            car.Status = Constants.CAR_UNAVAILABLE;
+            //have to comment it for part B
+            //car.Status = Constants.CAR_UNAVAILABLE;
             await Context.SaveChangesAsync();
         }
 
@@ -134,5 +174,6 @@ namespace CarDealer.UI.Data.Repositories
             Context.CarModels.Add(carModel);
 
         }
+
     }
 }

@@ -22,7 +22,18 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<CarFeature>()
+                    .MapToStoredProcedures();
+            modelBuilder.Entity<CarModel>()
+                    .MapToStoredProcedures();
+            modelBuilder.Entity<CarSale>()
+                    .MapToStoredProcedures();
+            modelBuilder.Entity<Customer>()
+                    .MapToStoredProcedures();
+            modelBuilder.Entity<Employee>()
+                    .MapToStoredProcedures();
+            modelBuilder.Entity<Person>()
+                    .MapToStoredProcedures();
         }
     }
 }

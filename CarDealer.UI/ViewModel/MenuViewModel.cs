@@ -23,6 +23,7 @@ namespace CarDealer.UI.ViewModel
         public DelegateCommand<object> ShowEmployeeListCommand { get; }
         public DelegateCommand<object> ShowCarListCommand { get; }
         public DelegateCommand<object> ShowSaleListCommand { get; }
+        public DelegateCommand<object> ShowCarModelListCommand { get; }
         public DelegateCommand<object> LogoutCommand { get; }
         public DelegateCommand<object> ShowMyProfileCommand { get; }
         public DelegateCommand<object> ShowMyCarsCommand { get; }
@@ -43,6 +44,7 @@ namespace CarDealer.UI.ViewModel
             ShowMyProfileCommand = new DelegateCommand<object>(ShowMyProfileExecute);
             ShowMyCarsCommand = new DelegateCommand<object>(ShowMyCarsExecute);
         }
+
 
         private void ShowMyCarsExecute(object obj)
         {
@@ -123,7 +125,8 @@ namespace CarDealer.UI.ViewModel
             ObservableCollection<MenuItemViewModel> adminMenuItems = new ObservableCollection<MenuItemViewModel>();
             ObservableCollection<MenuItemViewModel> saleMenuItems = new ObservableCollection<MenuItemViewModel>()
             {
-                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand)
+                new MenuItemViewModel("List of Sold Cars", ShowSaleListCommand),
+                new MenuItemViewModel("List of Car Models", ShowCarModelListCommand)
             };
             ObservableCollection<MenuItemViewModel> carMenuItems = new ObservableCollection<MenuItemViewModel>
             {

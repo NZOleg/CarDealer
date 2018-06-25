@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
              
+        xmlns:view="clr-namespace:CarDealer.UI.View"
         xmlns:viewModel="clr-namespace:CarDealer.UI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:SaleFiltersViewModel}">
+            <view:SaleFiltersView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SaleListItemViewModel}">
         </DataTemplate>
         <Style x:Key="SaleListRowTemplate" TargetType="Button">
@@ -71,8 +75,20 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <Label FontWeight="Bold" FontSize="32" Visibility="{Binding NoCarAlertVisibility}"  Content="No Sales has been made yet!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <GroupBox  Header="Sales of Cars">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="1" FontWeight="Bold" FontSize="32" Visibility="{Binding NoCarAlertVisibility}"  Content="No Sales has been made yet!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <GroupBox Header="Sale Filters" Margin="0 0 5 0">
+            <ContentControl Grid.Row="0"
+                         Content="{Binding SaleFiltersViewModel}"  />
+        </GroupBox>
+        <GroupBox Grid.Column="1"  Header="Sales of Cars">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="saleList" ItemsSource="{Binding Sales, Mode=TwoWay}"
@@ -80,6 +96,20 @@
 
             </ScrollViewer>
             
+        </GroupBox>
+        <GroupBox Grid.Column="1"  Grid.Row="1" Header="Statistics">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="20" Content="Cars Sold:" />
+                    <Label FontSize="20" Content="{Binding TotalCars}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="20" Content="Total Gross Sales ($):" />
+                    <Label FontSize="20" Content="{Binding TotalGrossSales}" />
+                </StackPanel>
+            </StackPanel>
+
+
         </GroupBox>
     </Grid>
 </UserControl>

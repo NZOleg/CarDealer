@@ -4,21 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarDealer.UI.View"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
                           xmlns:c="clr-namespace:CarDealer.UI"
              xmlns:helper="clr-namespace:CarDealer.UI.Helpers"
              d:DesignHeight="600" d:DesignWidth="300">
     <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="helper:SortBySalesEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
         <helper:IntToTextConverter x:Key="IntToTextConverter" />
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
             <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -34,7 +43,7 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Content="Manufacturer:" Margin="10 5" />
                 <TextBox Grid.Column="1" Width="170" Text="{Binding Manufacturer,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
-               
+
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Model:" Margin="10 5" />
                 <TextBox Grid.Column="1" Grid.Row="1" Width="170" Text="{Binding Model,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 5"/>
@@ -44,7 +53,7 @@
                 <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Content="Engine Size:" Margin="10 5" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
                     <Label FontSize="10" VerticalAlignment="Center" Content="from"/>
-                    
+
                     <TextBox Width="50" Margin="10 5">
                         <Binding Path="EngineSizeMin"
              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
@@ -132,9 +141,21 @@
                         </Binding>
                     </TextBox>
                 </StackPanel>
-                
-            </Grid>
+                <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="9" Content="Sort by Sales:" Margin="10 5" />
+                <ComboBox Grid.Column="1" Grid.Row="9" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding SortByPopularity }" Margin="10 5"/>
+                <Label FontSize="10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="10" Content="Number of cars:" Margin="10 5" />
 
+
+                <TextBox Grid.Column="1" Grid.Row="10" Width="170" Margin="10 5">
+                    <Binding Path="NumberOfCars"
+             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" TargetNullValue="" Converter="{StaticResource IntToTextConverter}">
+                        <Binding.ValidationRules>
+                            <c:ValidationRules Type="filter"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+    </Grid>
+            
         </StackPanel>
 
     </Grid>
