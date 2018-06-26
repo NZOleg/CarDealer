@@ -42,7 +42,11 @@
                                 <Label Content="{Binding Car.CarModel.EngineSize}" />
                                 <Label Content="cc" />
                             </StackPanel>
-                            <Label Grid.Column="7" Content="{Binding Car.AskingPrice}" />
+                            <StackPanel Grid.Column="7" Orientation="Horizontal">
+
+                                <Label Content="$" />
+                                <Label Content="{Binding Car.AskingPrice}" />
+                            </StackPanel>
                             <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></ContentPresenter>
                         </Grid>
 
@@ -93,12 +97,37 @@
                          Content="{Binding CarFiltersViewModel}"  />
         </GroupBox>
         <GroupBox  Header="Cars" Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
+            
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="carList" ItemsSource="{Binding Cars, Mode=TwoWay}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Manufacturer" Grid.Column="0" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Model" Grid.Column="1" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Year" Grid.Column="2" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Body Type" Grid.Column="3" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Transmission" Grid.Column="4" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Mileage" Grid.Column="5" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Engine" Grid.Column="6" FontSize="12" FontWeight="ExtraBold"/>
+                    <Label Content="Price" Grid.Column="7" FontSize="12" FontWeight="ExtraBold"/>
+
+                    <ItemsControl Grid.Row="1" Grid.ColumnSpan="10" x:Name="carList" ItemsSource="{Binding Cars, Mode=TwoWay}"
                               ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
                               ItemTemplate="{StaticResource NaviItemTemplate}"/>
-
+                </Grid>
             </ScrollViewer>
 
         </GroupBox>

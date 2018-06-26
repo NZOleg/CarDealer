@@ -27,8 +27,6 @@
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
                                 <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"  Content="{Binding FormattedDate}" />
                             <Label Grid.Column="1"  Content="{Binding Sale.Customer.Person.Username}" />
@@ -91,9 +89,28 @@
         <GroupBox Grid.Column="1"  Header="Sales of Cars">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="saleList" ItemsSource="{Binding Sales, Mode=TwoWay}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Content="Date" Grid.Column="0" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Username" Grid.Column="1" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Manufacturer" Grid.Column="2" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Model" Grid.Column="3" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Year" Grid.Column="4" FontSize="12" FontWeight="ExtraBold" />
+                    <Label Content="Phone" Grid.Column="5" FontSize="12" FontWeight="ExtraBold" />
+                    <ItemsControl Grid.Row="1" Grid.ColumnSpan="15" x:Name="saleList" ItemsSource="{Binding Sales, Mode=TwoWay}"
                               ItemTemplate="{StaticResource NaviItemTemplate}"/>
-
+                </Grid>
             </ScrollViewer>
             
         </GroupBox>
